@@ -1,0 +1,19 @@
+vsim -gui work.exmux1
+# vsim -gui work.exmux1 
+# Start time: 12:59:24 on Dec 16,2021
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading work.exmux1(exmux1)
+add wave -position insertpoint  \
+sim:/exmux1/alusrc \
+sim:/exmux1/immediate \
+sim:/exmux1/src2 \
+sim:/exmux1/mux1res
+force -freeze sim:/exmux1/immediate 0000111100001111 0
+force -freeze sim:/exmux1/src2 0000111111110000 0
+run
+force -freeze sim:/exmux1/alusrc 0 0
+run
+force -freeze sim:/exmux1/alusrc 1 0
+run
