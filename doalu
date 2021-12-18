@@ -1,0 +1,42 @@
+vsim -gui work.alu
+# vsim -gui work.alu 
+# Start time: 11:16:56 on Dec 16,2021
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.alu(alu)
+add wave -position insertpoint  \
+sim:/alu/aluop \
+sim:/alu/src1 \
+sim:/alu/src2 \
+sim:/alu/inflags \
+sim:/alu/aluout \
+sim:/alu/flags \
+sim:/alu/result \
+sim:/alu/one \
+sim:/alu/carryflag \
+sim:/alu/zeroflag \
+sim:/alu/negativeflag
+force -freeze sim:/alu/aluop 000 0
+force -freeze sim:/alu/src1 0000000000001111 0
+force -freeze sim:/alu/src2 0000000000001000 0
+force -freeze sim:/alu/inflags 0000 0
+run
+force -freeze sim:/alu/aluop 001 0
+run
+force -freeze sim:/alu/aluop 010 0
+run
+force -freeze sim:/alu/aluop 011 0
+run
+force -freeze sim:/alu/aluop 100 0
+run
+force -freeze sim:/alu/aluop 101 0
+force -freeze sim:/alu/src2 0000000000000000 0
+run
+force -freeze sim:/alu/aluop 110 0
+force -freeze sim:/alu/src1 0000000000001000 0
+force -freeze sim:/alu/src2 0000000000001111 0
+run
+force -freeze sim:/alu/aluop 111 0
+run

@@ -1,0 +1,41 @@
+vsim -gui work.exmembuff
+# vsim -gui work.exmembuff 
+# Start time: 17:52:04 on Dec 16,2021
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading work.exmembuff(exmembuff)
+add wave -position insertpoint  \
+sim:/exmembuff/clk \
+sim:/exmembuff/rst \
+sim:/exmembuff/src1add \
+sim:/exmembuff/scr2add \
+sim:/exmembuff/destadd \
+sim:/exmembuff/aluout \
+sim:/exmembuff/scr1 \
+sim:/exmembuff/immediate \
+sim:/exmembuff/pc \
+sim:/exmembuff/src1addS \
+sim:/exmembuff/scr2addS \
+sim:/exmembuff/destaddS \
+sim:/exmembuff/aluoutS \
+sim:/exmembuff/scr1S \
+sim:/exmembuff/immediateS \
+sim:/exmembuff/pcS
+noforce sim:/exmembuff/clk
+force -freeze sim:/exmembuff/clk 0 0, 1 {50 ps} -r 100
+force -freeze sim:/exmembuff/rst 1 0
+run
+force -freeze sim:/exmembuff/rst 0 0
+force -freeze sim:/exmembuff/src1add 001 0
+force -freeze sim:/exmembuff/scr2add 010 0
+force -freeze sim:/exmembuff/destadd 100 0
+force -freeze sim:/exmembuff/aluout 0000000000001111 0
+force -freeze sim:/exmembuff/scr1 0000000000000001 0
+force -freeze sim:/exmembuff/immediate 0000000000001010 0
+force -freeze sim:/exmembuff/pc 00000000000000001111000011110011 0
+run
+force -freeze sim:/exmembuff/immediate 0000000000001111 0
+run
+force -freeze sim:/exmembuff/pc 00000000000000001111000011111111 0
+run
