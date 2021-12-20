@@ -12,29 +12,6 @@ ENTITY registerfile is
 END registerfile;
 
 ARCHITECTURE registerfile_imp of registerfile is
-    COMPONENT reg is
-        PORT(
-            clk,rst,en : IN std_logic ;
-            D : IN std_logic_vector(15 downto 0);
-            Q : OUT std_logic_vector(15 downto 0)
-        );
-    END COMPONENT;
-
-    COMPONENT decoder is
-        PORT(
-            en : IN std_logic;
-            S : IN std_logic_vector(2 downto 0);
-            A : OUT std_logic_vector(7 downto 0)
-        );
-    END COMPONENT;
-
-    COMPONENT tri_state is
-        PORT(
-            A : IN std_logic_vector(15 downto 0);
-            B : OUT std_logic_vector(15 downto 0);
-            en : IN std_logic
-        );
-    END COMPONENT;
     -- Writing and reading signals
     SIGNAL reg_enable : std_logic_vector(7 downto 0);
     SIGNAL tri_state_src1 : std_logic_vector (7 downto 0);
@@ -45,13 +22,13 @@ ARCHITECTURE registerfile_imp of registerfile is
 
     BEGIN 
     -- Writing and Reading Decoders
-    enable_read : decoder PORT MAP (wb , Rdst_addr , reg_enable);
-    enable_write_src1: decoder PORT MAP ("NOT"(wb) , Rsrc1_addr , tri_state_src1);
-    enable_write_src2: decoder PORT MAP ("NOT"(wb) , Rsrc2_addr , tri_state_src2);
+    enable_read : entity  work.decoder PORT MAP (wb , Rdst_addr , reg_enable);
+    enable_write_src1: entity  work.decoder PORT MAP ("NOT"(wb) , Rsrc1_addr , tri_state_src1);
+    enable_write_src2: entity  work.decoder PORT MAP ("NOT"(wb) , Rsrc2_addr , tri_state_src2);
     -- Generate 8 registers with Tri-state buffers for every out databus
     loop0: FOR i IN 0 TO 7 GENERATE
-    regx: reg PORT MAP (clk , rst , reg_enable(i),Rdst_data,reg_out(i));
-    tri_src1x : tri_state PORT MAP (reg_out(i) , Rsrc1,tri_state_src1(i));
-    tri_src2x : tri_state PORT MAP (reg_out(i) , Rsrc2,tri_state_src2(i));
+    regx: entity  work.reg PORT MAP (clk , rst , reg_enable(i),Rdst_data,reg_out(i));
+    tri_src1x : entity  work.tri_state PORT MAP (reg_out(i) , Rsrc1,tri_state_src1(i));
+    tri_src2x : entity  work.tri_state PORT MAP (reg_out(i) , Rsrc2,tri_state_src2(i));
     END GENERATE;
 END registerfile_imp;

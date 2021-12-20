@@ -23,27 +23,6 @@ ENTITY decode_stage IS
 END decode_stage;
 
 ARCHITECTURE decode_stage_imp OF decode_stage IS
-    COMPONENT ControlUnit IS
-    PORT(
-        family : IN STD_LOGIC_VECTOR(1 downto 0) ;
-        func : IN STD_LOGIC_VECTOR(2 downto 0) ;
-        src1_addr : IN STD_LOGIC_VECTOR(2 downto 0) ;
-        call , memread , memwrite , alusrc , pc_to_stack , ldm , memtoreg , regwrite , portread , portwrite
-        , mem_to_pc , rti , ret : OUT STD_LOGIC;
-        stack : OUT STD_LOGIC_VECTOR(1 downto 0) ;
-        aluop : OUT STD_LOGIC_VECTOR(2 downto 0) 
-    );
-    END COMPONENT;
-    -- -----------------------------------------------------------------
-    COMPONENT registerfile IS
-    PORT(
-        Rsrc1_addr , Rsrc2_addr , Rdst_addr  : IN STD_LOGIC_VECTOR(2 downto 0);
-        Rsrc1 , Rsrc2  : OUT STD_LOGIC_VECTOR(15 downto 0);
-        Rdst_data : IN STD_LOGIC_VECTOR(15 downto 0);
-        wb: IN std_logic;
-        clk , rst : IN std_logic
-    );
-    END COMPONENT;
     SIGNAL call_sig , memread_sig , memwrite_sig , alusrc_sig , pc_to_stack_sig , ldm_sig , memtoreg_sig
      , regwrite_sig , portread_sig , portwrite_sig
     , mem_to_pc_sig , rti_sig , ret_sig :  STD_LOGIC ;
@@ -51,12 +30,12 @@ ARCHITECTURE decode_stage_imp OF decode_stage IS
     SIGNAL aluop_sig :  STD_LOGIC_VECTOR(2 downto 0) ;
     SIGNAL Rsrc1_sig , Rsrc2_sig  :  STD_LOGIC_VECTOR(15 downto 0);
 BEGIN
-    control_unit : ControlUnit PORT MAP (family_in , func ,Rsrc1_addr_in ,
+    control_unit :  entity  work.ControlUnit PORT MAP (family_in , func ,Rsrc1_addr_in ,
     call_sig , memread_sig , memwrite_sig , alusrc_sig , pc_to_stack_sig , ldm_sig , memtoreg_sig
     , regwrite_sig , portread_sig , portwrite_sig
    , mem_to_pc_sig , rti_sig , ret_sig ,stack_sig , aluop_sig
     );
-    register_file : registerfile PORT MAP (Rsrc1_addr_in , Rsrc2_addr_in,Rdst_addr_wb,
+    register_file : entity  work.registerfile PORT MAP (Rsrc1_addr_in , Rsrc2_addr_in,Rdst_addr_wb,
         Rsrc1_sig,Rsrc2_sig , Rdst_data_wb , regwrite_sig , clk , rst
     );
     PROCESS(clk)
