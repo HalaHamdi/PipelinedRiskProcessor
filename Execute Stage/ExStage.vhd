@@ -34,7 +34,9 @@ alu: entity work.alu port map(aluop,src1,mux1result,flags,aluout,aluflagsout);
 flagreg: entity work.flagreg port map('1',clk,rst,aluflagsout,flags);
 buff: entity work.ExMemBuff port map(clk, rst, 
 				     addr_Rsrc1_in, addr_Rsrc2_in, addr_Rdst_in,
-				     aluflagsout
-								aluout)
+				     aluout,src1,immediate,
+				     pc_in,
+				     writeback_in, ldm_in, port_read_in, mem_to_reg_in
+					);
 		
 END ExStage; 
