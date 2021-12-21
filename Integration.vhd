@@ -17,16 +17,18 @@ architecture rtl of Integration is
 
     -- Decode Output
     signal family : STD_LOGIC_VECTOR(1 downto 0);
-    SIGNAL call_sig , memread_sig , memwrite_sig , alusrc_sig , pc_to_stack_sig , ldm_sig , memtoreg_sig
-     , regwrite_sig , portread_sig , portwrite_sig
-    , mem_to_pc_sig , rti_sig , ret_sig :  STD_LOGIC;
-    SIGNAL stack_sig :  STD_LOGIC_VECTOR(1 downto 0) ;
-    SIGNAL aluop_sig :  STD_LOGIC_VECTOR(2 downto 0) ;
-    SIGNAL Rsrc1_sig , Rsrc2_sig  :  STD_LOGIC_VECTOR(15 downto 0);
+    SIGNAL call_sig_D_D , memread_sig_D , memwrite_sig_D , alusrc_sig_D , pc_to_stack_sig_D , ldm_sig_D , memtoreg_sig_D
+     , regwrite_sig_D , portread_sig_D , portwrite_sig_D
+    , mem_to_pc_sig_D , rti_sig_D , ret_sig_D :  STD_LOGIC;
+    SIGNAL stack_sig_D :  STD_LOGIC_VECTOR(1 downto 0) ;
+    SIGNAL aluop_sig_D :  STD_LOGIC_VECTOR(2 downto 0) ;
+    SIGNAL Rsrc1_sig_D , Rsrc2_sig_D  :  STD_LOGIC_VECTOR(15 downto 0);
     signal PC_D : std_logic_vector(31 downto 0);
     signal offset_D: STD_LOGIC_VECTOR(15 downto 0);
     signal Rsrc1_addr_D , Rsrc2_addr_D :  STD_LOGIC_VECTOR(2 downto 0);
     signal Rdst_D : STD_LOGIC_VECTOR(2 downto 0);
+
+    -- Excute Output
 begin
 
     fetch_stahe: entity work.Fetch port map(clk, reset, instruction, PC);
@@ -37,12 +39,12 @@ begin
                                       PC,
                                       clk, reset,'0',
                                       family,
-                                      call_sig , memread_sig , memwrite_sig , alusrc_sig , pc_to_stack_sig , ldm_sig , memtoreg_sig
-                                    , regwrite_sig , portread_sig , portwrite_sig
-                                    , mem_to_pc_sig , rti_sig , ret_sig,
-                                    stack_sig, aluop_sig,
+                                      call_sig_D_D , memread_sig_D , memwrite_sig_D , alusrc_sig_D , pc_to_stack_sig_D , ldm_sig_D , memtoreg_sig_D
+                                    , regwrite_sig_D , portread_sig_D , portwrite_sig_D
+                                    , mem_to_pc_sig_D , rti_sig_D , ret_sig_D,
+                                    stack_sig_D, aluop_sig_D,
                                     PC_D,
-                                    Rsrc1_sig , Rsrc2_sig, offset_D,
+                                    Rsrc1_sig_D , Rsrc2_sig_D, offset_D,
                                     Rsrc1_addr_D , Rsrc2_addr_D,
                                     Rdst_D);
     
