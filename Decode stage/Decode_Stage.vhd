@@ -9,7 +9,7 @@ ENTITY decode_stage IS
         Rdst_data_wb : IN STD_LOGIC_VECTOR(15 downto 0);
         offset_in :  IN STD_LOGIC_VECTOR(15 downto 0);
         pc_in : IN STD_LOGIC_VECTOR(31 downto 0);
-        clk ,rst: IN STD_LOGIC;
+        clk ,rst, write_back: IN STD_LOGIC;
         family: OUT STD_LOGIC_VECTOR(1 downto 0);
         call , memread , memwrite , alusrc , pc_to_stack , ldm , memtoreg , regwrite , portread , portwrite
         , mem_to_pc , rti , ret : OUT STD_LOGIC;
@@ -36,7 +36,7 @@ BEGIN
    , mem_to_pc_sig , rti_sig , ret_sig ,stack_sig , aluop_sig
     );
     register_file : entity  work.registerfile PORT MAP (Rsrc1_addr_in , Rsrc2_addr_in,Rdst_addr_wb,
-        Rsrc1_sig,Rsrc2_sig , Rdst_data_wb , regwrite_sig , clk , rst
+        Rsrc1_sig,Rsrc2_sig , Rdst_data_wb , write_back , clk , rst
     );
     PROCESS(clk)
 	BEGIN
