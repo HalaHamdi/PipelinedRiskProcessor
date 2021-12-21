@@ -8,8 +8,10 @@ ENTITY ExStage IS
 	     immediate,src1,src2:IN std_logic_vector(15 DOWNTO 0);
 		 writeback_in, ldm_in, port_read_in, mem_to_reg_in: IN std_logic;
 		 addr_Rsrc1_in, addr_Rsrc2_in, addr_Rdst_in: IN std_logic_vector(2 downto 0);
-		 memory_data_in, alu_result_in: IN std_logic_vector(15 downto 0);
-		 pc_in: IN std_logic_vector(31 downto 0));
+		 pc_in: IN std_logic_vector(31 downto 0);
+		 
+		 alu_result: OUT std_logic_vector(15 downto 0)
+		 );
 
 END ENTITY ExStage;
 
@@ -25,6 +27,8 @@ BEGIN
 mux1: entity work.exmux1 port map (alusrc,immediate,src2,mux1result);
 alu:  entity work.alu port map(aluop,src1,mux1result,flags,aluout,aluflagsout);
 flagreg:  entity work.flagreg port map('1',clk,rst,aluflagsout,flags);
-buff: entity work.ExMemBuff port map(clk, rst)
+buff: entity work.ExMemBuff port map(clk, rst, 
+								addr_Rsrc1_in, addr_Rsrc2_in, addr_Rdst_in,
+								aluout)
 		
 END ExStage; 
