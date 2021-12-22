@@ -1,5 +1,6 @@
 vsim -gui work.integration
 add wave -position end sim:/integration/*
+add wave -position 47  sim:/integration/execute_stage/aluflagsout
 force -freeze sim:/integration/clk 1 0, 0 {50 ps} -r 100
 force -freeze sim:/integration/reset 1 0
 mem load -filltype value -filldata 100 -fillradix symbolic /integration/fetch_stahe/Memory/ram(0)

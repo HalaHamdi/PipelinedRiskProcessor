@@ -35,7 +35,9 @@ result <= ('0' &not src1) WHEN aluop="001"
 
 --just updating the carry flag if it is arithmetic or shift opertaions
 carryflag <='1' WHEN aluop="000"
-	   ELSE result(16) WHEN (aluop="010" or aluop="100" or aluop="110")
+	   ELSE result(16) WHEN aluop="010"
+	   ELSE result(16) WHEN aluop="100" 
+	   ELSE result(16) WHEN aluop="110"
 	   ELSE inflags(2);
 
 --updating the zero & negative flags  if arithmetic ,shift or logic operations
@@ -44,7 +46,7 @@ zeroflag <= inflags(0) WHEN (aluop="000" or aluop="011")
 	ELSE '1' WHEN to_integer(signed(result))= 0
 	ElSE '0' WHEN to_integer(signed(result))/= 0;
 
-negativeflag <=inflags(0) WHEN (aluop="000" or aluop="011")
+negativeflag <=inflags(1) WHEN (aluop="000" or aluop="011")
 	ELSE '1' WHEN to_integer(signed(result)) < 0
 	ELSE '0' WHEN to_integer(signed(result)) >= 0; 
 

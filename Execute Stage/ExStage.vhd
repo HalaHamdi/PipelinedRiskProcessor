@@ -3,7 +3,7 @@ use ieee.std_logic_1164.all;
 USE IEEE.numeric_std.all;
 
 ENTITY ExStage IS 
-	PORT(alusrc,clk,rst:IN std_logic;
+	PORT(clk,rst,alusrc:IN std_logic;
 	     aluop:IN std_logic_vector(2 DOWNTO 0);
 	     stack_in:In std_logic_vector(1 DOWNTO 0);
 	     immediate_in,src1_in,src2:IN std_logic_vector(15 DOWNTO 0);

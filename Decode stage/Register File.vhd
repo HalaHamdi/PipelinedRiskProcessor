@@ -23,8 +23,8 @@ ARCHITECTURE registerfile_imp of registerfile is
     BEGIN 
     -- Writing and Reading Decoders
     enable_read : entity  work.decoder PORT MAP (wb , Rdst_addr , reg_enable);
-    enable_write_src1: entity  work.decoder PORT MAP ("NOT"(wb) , Rsrc1_addr , tri_state_src1);
-    enable_write_src2: entity  work.decoder PORT MAP ("NOT"(wb) , Rsrc2_addr , tri_state_src2);
+    enable_write_src1: entity  work.decoder PORT MAP ('1' , Rsrc1_addr , tri_state_src1);
+    enable_write_src2: entity  work.decoder PORT MAP ('1' , Rsrc2_addr , tri_state_src2);
     -- Generate 8 registers with Tri-state buffers for every out databus
     loop0: FOR i IN 0 TO 7 GENERATE
     regx: entity  work.reg PORT MAP (clk , rst , reg_enable(i),Rdst_data,reg_out(i));
