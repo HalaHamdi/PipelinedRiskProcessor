@@ -1,0 +1,48 @@
+vsim -gui work.fu
+# vsim -gui work.fu 
+# Start time: 19:47:05 on Jan 04,2022
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.fu(fu)
+add wave -position insertpoint  \
+sim:/fu/buff3_wb \
+sim:/fu/buff4_wb \
+sim:/fu/buff3_ldm \
+sim:/fu/buff4_ldm \
+sim:/fu/buff3_portr \
+sim:/fu/buff4_portr \
+sim:/fu/buff2_address_src1 \
+sim:/fu/buff2_address_src2 \
+sim:/fu/buff3_address_dest \
+sim:/fu/buff4_address_dest \
+sim:/fu/fu_sig1 \
+sim:/fu/fu_sig2
+force -freeze sim:/fu/buff3_wb 0 0
+force -freeze sim:/fu/buff4_wb 0 0
+force -freeze sim:/fu/buff3_ldm 1 0
+force -freeze sim:/fu/buff4_ldm 0 0
+force -freeze sim:/fu/buff3_portr 0 0
+force -freeze sim:/fu/buff4_portr 0 0
+force -freeze sim:/fu/buff2_address_src1 001 0
+force -freeze sim:/fu/buff2_address_src2 002 0
+force -freeze sim:/fu/buff3_address_dest 010 0
+force -freeze sim:/fu/buff4_address_dest 000 0
+force -freeze sim:/fu/buff2_address_src2 100 0
+run
+force -freeze sim:/fu/buff3_address_dest 001 0
+force -freeze sim:/fu/buff4_address_dest 100 0
+force -freeze sim:/fu/buff4_portr 1 0
+force -freeze sim:/fu/buff3_wb 1 0
+force -freeze sim:/fu/buff4_wb 1 0
+run
+force -freeze sim:/fu/buff3_ldm 0 0
+force -freeze sim:/fu/buff4_portr 0 0
+run
+force -freeze sim:/fu/buff3_address_dest 100 0
+force -freeze sim:/fu/buff4_address_dest 001 0
+run
+force -freeze sim:/fu/buff4_ldm 1 0
+force -freeze sim:/fu/buff4_portr 0 0
+run

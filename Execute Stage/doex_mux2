@@ -1,0 +1,34 @@
+vsim -gui work.exmux2
+# vsim -gui work.exmux2 
+# Start time: 20:15:30 on Jan 04,2022
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading work.exmux2(exmux2)
+add wave -position insertpoint  \
+sim:/exmux2/fu_sig1 \
+sim:/exmux2/src1 \
+sim:/exmux2/buff3_alu \
+sim:/exmux2/buff4_alu \
+sim:/exmux2/buff3_imm \
+sim:/exmux2/buff4_imm \
+sim:/exmux2/in_port \
+sim:/exmux2/alu_operand1
+force -freeze sim:/exmux2/fu_sig1 000 0
+force -freeze sim:/exmux2/src1 16#122 0
+force -freeze sim:/exmux2/buff3_alu 16#100 0
+force -freeze sim:/exmux2/buff4_alu 16#9 0
+force -freeze sim:/exmux2/buff3_imm 16#20 0
+force -freeze sim:/exmux2/buff4_imm 16#15 0
+force -freeze sim:/exmux2/in_port 16#101 0
+run
+force -freeze sim:/exmux2/fu_sig1 001 0
+run
+force -freeze sim:/exmux2/fu_sig1 010 0
+run
+force -freeze sim:/exmux2/fu_sig1 011 0
+run
+force -freeze sim:/exmux2/fu_sig1 100 0
+run
+force -freeze sim:/exmux2/fu_sig1 111 0
+run
