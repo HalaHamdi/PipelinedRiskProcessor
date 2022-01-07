@@ -52,7 +52,7 @@ operands = {
              "pos": {"dst": 1, "src1": 1}},
 
     "mov":  {"names": ['dst', "src1"],
-             "pos": {"dst": 1, "src1": 2}},
+             "pos": {"dst": 2, "src1": 1}},
 
     "add":  {"names": ['dst', "src1", "src2"],
              "pos": {"dst": 1, "src1": 2, "src2": 3}},
@@ -67,10 +67,10 @@ operands = {
              "pos": {"dst": 1, "src1": 2, "offset": 3}},
 
     "out":   {"names": ['src1'],
-             "pos": {"src1": 1}},
+              "pos": {"src1": 1}},
 
     "in":  {"names": ['dst'],
-             "pos": {"dst": 1}},
+            "pos": {"dst": 1}},
 
     "ldd":  {"names": ['src1', 'dst', 'offset'],
              "pos": {"src1": 3, "dst": 1, "offset": 2}},
