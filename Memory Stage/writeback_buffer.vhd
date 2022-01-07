@@ -12,7 +12,8 @@ writeback_in, ldm_in, port_read_in, mem_to_reg_in: IN std_logic;
 
 addr_Rsrc1_in, addr_Rsrc2_in, addr_Rdst_in: IN std_logic_vector(2 downto 0);
 
-memory_data_in, alu_result_in, immediate_value_in: IN std_logic_vector(15 downto 0);
+memory_data_in: IN std_logic_vector(31 downto 0);
+alu_result_in, immediate_value_in: IN std_logic_vector(15 downto 0);
 pc_in: IN std_logic_vector(31 downto 0);
 
 
@@ -21,7 +22,8 @@ writeback_out, ldm_out, port_read_out, mem_to_reg_out: OUT std_logic;
 
 addr_Rsrc1_out, addr_Rsrc2_out, addr_Rdst_out: OUT std_logic_vector(2 downto 0);
 
-memory_data_out, alu_result_out, immediate_value_out: OUT std_logic_vector(15 downto 0);
+memory_data_out: OUT std_logic_vector(31 downto 0);
+alu_result_out, immediate_value_out: OUT std_logic_vector(15 downto 0);
 pc_out: OUT std_logic_vector(31 downto 0)
 );
 end entity writeback_buffer;
