@@ -8,7 +8,7 @@ entity memory_stage is
 port(
     rst, clk:IN std_logic;
 
-    stack_in: IN std_logic_vector(1 downto 0);--TODO: add it in the execute buffer
+    stack_in: IN std_logic_vector(1 downto 0);
 
     writeback_in, ldm_in, port_read_in, mem_to_reg_in: IN std_logic;
     pc_to_stack_in, mem_read_in, mem_write_in, rti_in, ret_in, call_in: IN std_logic;

@@ -12,7 +12,9 @@ entity FDBuffer is
         reset_in        : in std_logic;
         PC_out          : out std_logic_vector(31 Downto 0);
         Instruction_out : out std_logic_vector(31 Downto 0);
-        reset_out       : out std_logic
+        reset_out       : out std_logic;
+        inport_val_in   : in std_logic_vector(15 Downto 0);
+        inport_val_out   : out std_logic_vector(15 Downto 0)
     );
 end entity;
 
@@ -31,7 +33,7 @@ begin
             elsif enable = '1' then 
                 PC_out <= PC_in;
                 Instruction_out  <= Instruction_in;
-                
+                inport_val_out <= inport_val_in;
             end if;
 
         end if;

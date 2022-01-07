@@ -16,7 +16,7 @@ ARCHITECTURE reg_imp OF reg is
     BEGIN
         IF (rst='1') THEN
           Q <= (OTHERS => '0') ;
-        ELSIF rising_edge(clk) THEN
+        ELSIF falling_edge(clk) THEN
           IF (en ='1') THEN
               Q <= D;
           END IF;

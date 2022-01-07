@@ -22,7 +22,9 @@ ENTITY decode_stage IS
         -- Second Phase Signals
         buff2_Rdst_addr : IN STD_LOGIC_VECTOR(2 downto 0) ;
         buff2_memread : IN STD_LOGIC ;
-        freeze_pc , disable_buff  : OUT STD_LOGIC
+        freeze_pc , disable_buff  : OUT STD_LOGIC;
+        inport_val_in: IN STD_LOGIC_VECTOR(15 downto 0);
+        inport_val_out: OUT STD_LOGIC_VECTOR(15 downto 0)
     );
 END decode_stage;
 
@@ -103,6 +105,7 @@ BEGIN
             Rsrc2_addr <= Rsrc2_addr_in;
             offset <= offset_in;
             Rdst <= Rdst_addr_in;
+            inport_val_out <= inport_val_in;
         END IF;
     END PROCESS;
 END decode_stage_imp;

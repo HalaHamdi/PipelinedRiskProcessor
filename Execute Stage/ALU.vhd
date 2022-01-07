@@ -25,7 +25,7 @@ signal zeroflag:std_logic;
 signal negativeflag:std_logic;
 BEGIN
 result <= ('0' &not src1) WHEN aluop="001"
-	  ELSE std_logic_vector(to_signed(to_integer(signed(src1))+to_integer(signed(one)),17)) WHEN aluop="010"
+	  ELSE std_logic_vector(to_unsigned(to_integer(signed(src1))+to_integer(signed(one)),17)) WHEN aluop="010"
 	  ELSE ('0' & src1)   WHEN aluop="011"
 	  ELSE std_logic_vector(to_signed(to_integer(signed(src1))+to_integer(signed(src2)),17))WHEN aluop="100"
 	  ELSE ('0' & (src1 and src2))WHEN aluop="101"
@@ -43,12 +43,12 @@ carryflag <='1' WHEN aluop="000"
 --updating the zero & negative flags  if arithmetic ,shift or logic operations
 --all alu family except mov and setc
 zeroflag <= inflags(0) WHEN (aluop="000" or aluop="011")
-	ELSE '1' WHEN to_integer(signed(result))= 0
-	ElSE '0' WHEN to_integer(signed(result))/= 0;
+	ELSE '1' WHEN to_integer(signed(result(15 downto 0)))= 0
+	ElSE '0' WHEN to_integer(signed(result(15 downto 0)))/= 0;
 
 negativeflag <=inflags(1) WHEN (aluop="000" or aluop="011")
-	ELSE '1' WHEN to_integer(signed(result)) < 0
-	ELSE '0' WHEN to_integer(signed(result)) >= 0; 
+	ELSE '1' WHEN to_integer(signed(result(15 downto 0))) < 0
+	ELSE '0' WHEN to_integer(signed(result(15 downto 0))) >= 0; 
 
 flags<='0'& carryflag & negativeflag & zeroflag;
 	

@@ -15,7 +15,7 @@ addr_Rsrc1_in, addr_Rsrc2_in, addr_Rdst_in: IN std_logic_vector(2 downto 0);
 memory_data_in: IN std_logic_vector(31 downto 0);
 alu_result_in, immediate_value_in: IN std_logic_vector(15 downto 0);
 pc_in: IN std_logic_vector(31 downto 0);
-
+inport_val_in: IN std_logic_vector(15 downto 0);
 
 empty_sp_exception_out, invalid_address_exception_out: OUT std_logic;
 writeback_out, ldm_out, port_read_out, mem_to_reg_out: OUT std_logic;
@@ -24,7 +24,8 @@ addr_Rsrc1_out, addr_Rsrc2_out, addr_Rdst_out: OUT std_logic_vector(2 downto 0);
 
 memory_data_out: OUT std_logic_vector(31 downto 0);
 alu_result_out, immediate_value_out: OUT std_logic_vector(15 downto 0);
-pc_out: OUT std_logic_vector(31 downto 0)
+pc_out: OUT std_logic_vector(31 downto 0);
+inport_val_out: OUT std_logic_vector(15 downto 0)
 );
 end entity writeback_buffer;
 
@@ -64,6 +65,7 @@ elsif (rising_edge(clk)) then
 	alu_result_out <= alu_result_in;
 	immediate_value_out <= immediate_value_in;
 	pc_out <= pc_in;
+	inport_val_out <= inport_val_in;
 end if;
 end process;
 end arch1;

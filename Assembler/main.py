@@ -4,7 +4,7 @@ import string
 
 binary = ["0" * 16] * 10000
 
-with open('./TestCases/test.asm') as f:
+with open('./TestCases/OneOperand.asm') as f:
     index = 0
     for i, line in enumerate(f):
         line = line.strip()
@@ -53,7 +53,7 @@ with open('./TestCases/test.asm') as f:
                 binary[index] = offset
                 index += 1
 
-with open("output.bin", "w") as f:
+with open("output.mem", "w") as f:
     for instruction in binary:
         f.write(instruction)
         f.write('\n')

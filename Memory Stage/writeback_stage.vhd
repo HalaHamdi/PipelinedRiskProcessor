@@ -3,6 +3,9 @@ LIBRARY IEEE;
 USE IEEE.STD_LOGIC_1164.ALL;
 USE IEEE.NUMERIC_STD.ALL;
 
+-- TODO: get mem to pc out of the buffer 
+-- TODO: get inport value out of buffer
+
 entity writeback_stage is
 port(
 rst, clk:IN std_logic;
@@ -32,6 +35,7 @@ signal buff_addr_Rsrc1,buff_addr_Rsrc2,buff_addr_Rdst: std_logic_vector(2 downto
 signal buff_alu_result,buff_immediate_value: std_logic_vector(15 downto 0);
 signal buff_memory_data,buff_pc: std_logic_vector(31 downto 0);
 signal epc_signal: std_logic_vector(31 downto 0); --exception program counter
+signal buff_inport_val: std_logic_vector(15 downto 0);
 begin
 
 -- Defining the EPC register
@@ -56,6 +60,7 @@ memory_data_in=>memory_data_in,
 alu_result_in=>alu_result_in,
 immediate_value_in=>immediate_value_in,
 pc_in=>pc_in,
+inport_val_in=>in_port_val,
 
 empty_sp_exception_out=>buff_empty_sp_exception,
 invalid_address_exception_out=>buff_invalid_address_exception,
@@ -69,7 +74,8 @@ addr_Rdst_out=>buff_addr_Rdst,
 memory_data_out=>buff_memory_data,
 alu_result_out=>buff_alu_result,
 immediate_value_out=>buff_immediate_value,
-pc_out=>buff_pc
+pc_out=>buff_pc,
+inport_val_out=>buff_inport_val
 );
 
 -- defining the writeback mux
@@ -80,7 +86,7 @@ memory_data=>buff_memory_data(15 downto 0),
 mem_to_reg=>buff_mem_to_reg,
 port_read=>buff_port_read,
 ldm=>buff_ldm,
-in_port_value=>in_port_val,
+in_port_value=>buff_inport_val,
 
 writeback_mux_out=>writeback_mux_out
 );

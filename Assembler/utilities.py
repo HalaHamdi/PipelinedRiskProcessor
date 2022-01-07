@@ -66,10 +66,10 @@ operands = {
     "iadd": {"names": ['dst', "src1", "offset"],
              "pos": {"dst": 1, "src1": 2, "offset": 3}},
 
-    "in":   {"names": ['src1'],
+    "out":   {"names": ['src1'],
              "pos": {"src1": 1}},
 
-    "out":  {"names": ['dst'],
+    "in":  {"names": ['dst'],
              "pos": {"dst": 1}},
 
     "ldd":  {"names": ['src1', 'dst', 'offset'],
