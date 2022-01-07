@@ -25,11 +25,11 @@ signal zeroflag:std_logic;
 signal negativeflag:std_logic;
 BEGIN
 result <= ('0' &not src1) WHEN aluop="001"
-	  ELSE std_logic_vector(to_unsigned(to_integer(signed(src1))+to_integer(signed(one)),17)) WHEN aluop="010"
+	  ELSE std_logic_vector(to_signed(to_integer(unsigned(src1))+to_integer(unsigned(one)),17)) WHEN aluop="010"
 	  ELSE ('0' & src1)   WHEN aluop="011"
-	  ELSE std_logic_vector(to_signed(to_integer(signed(src1))+to_integer(signed(src2)),17))WHEN aluop="100"
+	  ELSE std_logic_vector(to_signed(to_integer(unsigned(src1))+to_integer(unsigned(src2)),17))WHEN aluop="100"
 	  ELSE ('0' & (src1 and src2))WHEN aluop="101"
-          ELSE std_logic_vector(to_signed(to_integer(signed(src1))-to_integer(signed(src2)),17))WHEN aluop="110";
+          ELSE std_logic_vector(to_signed(to_integer(unsigned(src1))-to_integer(unsigned(src2)),17))WHEN aluop="110";
 --else what is the default case? or leave it as a latch?
 -- In subtracting , src1-src2 or opposite?
 
