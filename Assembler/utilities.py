@@ -10,8 +10,8 @@ Regsiters = {
 }
 
 opcodes = {
-    "nop": "0000111",
-    "hlt": "0000011",
+    "nop": "0000110",
+    "hlt": "0000010",
 
     "setc": "0000000",
     "not": "0000100",
@@ -76,10 +76,10 @@ operands = {
              "pos": {"src1": 3, "dst": 1, "offset": 2}},
 
     "std":  {"names": ['src1', "src2", "offset"],
-             "pos": {"src1": 1, "src2": 3, "offset": 2}},
+             "pos": {"src1": 3, "src2": 1, "offset": 2}},
 
-    "push": {"names": ['src1'],
-             "pos": {"src1": 1}},
+    "push": {"names": ['src2'],
+             "pos": {"src2": 1}},
 
     "pop":  {"names": ['dst'],
              "pos": {"dst": 1}},

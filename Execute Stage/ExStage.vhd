@@ -18,7 +18,7 @@ ENTITY ExStage IS
 	     writeback_out, ldm_out, port_read_out, mem_to_reg_out,pc_to_stack_out,mem_write_out,mem_read_out,rti_out,ret_out,call_out: OUT std_logic;
 	     stack_out,int_out:OUT std_logic_vector(1 DOWNTO 0);
 	     src1add_out,scr2add_out,destadd_out:OUT std_logic_vector(2 DOWNTO 0);
-	     aluout_out,scr1_out,immediate_out:OUT std_logic_vector (15 DOWNTO 0);
+	     aluout_out,scr2_out,immediate_out:OUT std_logic_vector (15 DOWNTO 0);
 	     pc_out:OUT std_logic_vector (31 DOWNTO 0);
 		 inport_val_out: OUT std_logic_vector (15 DOWNTO 0)
 		 );
@@ -56,7 +56,7 @@ mux4: entity work.exmux4 port map (rti_in,aluflagsout,flags_reserved_out,flags_r
 buff: entity work.ExMemBuff port map(clk, rst, 
 				     stack_in,int_in,
 				     addr_Rsrc1_in, addr_Rsrc2_in, addr_Rdst_in,
-				     aluout,src1_in,immediate_in,
+				     aluout,src2,immediate_in,
 				     pc_in,
 				     writeback_in, ldm_in, port_read_in, mem_to_reg_in,pc_to_stack_in,mem_write_in,mem_read_in,rti_in,ret_in,call_in,
 					 in_port,
@@ -64,7 +64,7 @@ buff: entity work.ExMemBuff port map(clk, rst,
 				     writeback_out, ldm_out, port_read_out, mem_to_reg_out,pc_to_stack_out,mem_write_out,mem_read_out,rti_out,ret_out,call_out,
 				     stack_out,int_out,
 				     src1add_out,scr2add_out,destadd_out,
-				     aluout_out,scr1_out,immediate_out,
+				     aluout_out,scr2_out,immediate_out,
 				     pc_out, inport_val_out
 					 );
 		

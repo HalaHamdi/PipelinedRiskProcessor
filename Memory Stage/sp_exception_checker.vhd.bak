@@ -1,0 +1,21 @@
+
+LIBRARY IEEE;
+USE IEEE.std_logic_1164.all;
+USE IEEE.numeric_std.all;
+
+entity sp_exception_checker is
+port(
+old_sp: IN std_logic_vector(31 downto 0);
+stack: IN std_logic_vector(1 downto 0);
+Clk, rti, ret: IN std_logic;
+
+empty_sp_exception: OUT std_logic
+);
+end entity sp_exception_checker;
+
+architecture sp_exception_imp of sp_exception_checker is
+begin
+	empty_sp_exception <= '1' when (rti = '1' or ret = '1') and (to_integer(unsigned(old_sp)) + 2) > 524287
+                        else '1' when (stack = "10" and (to_integer(unsigned(old_sp)) + 1) > 524287);
+                        else '0';
+end sp_exception_imp;

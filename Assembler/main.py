@@ -4,7 +4,7 @@ import string
 
 binary = ["0" * 16] * 10000
 
-with open('./TestCases/OneOperand.asm') as f:
+with open('./TestCases/Memory.asm') as f:
     index = 0
     for i, line in enumerate(f):
         line = line.strip()

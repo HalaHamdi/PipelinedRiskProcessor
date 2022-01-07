@@ -50,10 +50,10 @@ elsif (family = "00") AND (func = "110") then
 elsif (family = "00") AND (func = "111") then
     signals <= "010000010000000000";
 -- NOP
-elsif (family = "11") AND (func = "001") then
+elsif (family = "10") AND (func = "001") then
     signals <= "001100000000000000";
 -- HLT
-elsif (family = "11") AND (func = "000") then
+elsif (family = "10") AND (func = "000") then
     signals <= "001100000000000000";
 -- OUT
 elsif (family = "01") AND (func = "001") then

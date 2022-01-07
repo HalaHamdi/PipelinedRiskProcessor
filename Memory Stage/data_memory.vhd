@@ -22,7 +22,7 @@ signal mem: ram_type;
 begin
 process (Clk) is
 begin
-if (rising_edge(Clk)) then
+if (falling_edge(Clk)) then
 	if (mem_write = '1') then
 	
 		if (pc_to_stack = '1') then

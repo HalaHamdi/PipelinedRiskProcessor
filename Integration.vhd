@@ -37,7 +37,7 @@ architecture rtl of Integration is
     signal writeback_sig_E, ldm_sig_E, port_read_sig_E, mem_to_reg_sig_E,pc_to_stack_sig_E,mem_write_sig_E,mem_read_sig_E,rti_sig_E,ret_sig_E,call_sig_E: std_logic;
 	signal stack_sig_E,int_sig_E: std_logic_vector(1 DOWNTO 0);
 	signal src1add_E,scr2add_E,destadd_E: std_logic_vector(2 DOWNTO 0);
-	signal aluout_E,scr1_E,immediate_E: std_logic_vector (15 DOWNTO 0);
+	signal aluout_E,scr2_E,immediate_E: std_logic_vector (15 DOWNTO 0);
 	signal pc_E: std_logic_vector (31 DOWNTO 0);
     signal inport_val_E : STD_LOGIC_VECTOR(15 downto 0);
 
@@ -93,7 +93,7 @@ begin
                                     rti_sig_E,ret_sig_E,call_sig_E,
                                     stack_sig_E, int_sig_E,
                                     src1add_E,scr2add_E,destadd_E,
-                                    aluout_E,scr1_E,immediate_E,
+                                    aluout_E,scr2_E,immediate_E,
                                     pc_E, inport_val_E
                                     );
     memory_stage: entity work.memory_stage port map(reset, clk,
@@ -102,7 +102,7 @@ begin
                                     pc_to_stack_sig_E,mem_read_sig_E, mem_write_sig_E,
                                     rti_sig_E,ret_sig_E,call_sig_E,int_sig_E,
                                     src1add_E,scr2add_E,destadd_E,
-                                    aluout_E,immediate_E,scr1_E,
+                                    aluout_E,immediate_E,scr2_E,
                                     pc_E,
                                     empty_sp_exception_M, invalid_address_exception_M,
                                     writeback_sig_M, ldm_sig_M, port_read_sig_M, mem_to_reg_sig_M,

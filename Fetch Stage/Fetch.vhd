@@ -38,7 +38,7 @@ begin
                                                         PC, instruction, Buff1_reset,
                                                         inport_val_in, inport_val_out);
 
-    output <= "00000000000000000010011000000000" when (reset = '1' or Buff1_reset = '1')
+    output <= "00000000000000000000110000000000" when (reset = '1' or Buff1_reset = '1')
     else mem_out;  
     
     process (clk)
