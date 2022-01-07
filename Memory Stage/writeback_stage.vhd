@@ -24,7 +24,9 @@ writeback_out, port_read_out, ldm_out: OUT std_logic;
 addr_Rdst_out: OUT std_logic_vector(2 downto 0);
 empty_sp_exception_out, invalid_address_exception_out: OUT std_logic;
 
-epc: OUT std_logic_vector(31 downto 0) --exception program counter
+epc: OUT std_logic_vector(31 downto 0) ;--exception program counter
+memory_data_out,in_port_val_out:OUT std_logic_vector(15 downto 0);
+mem_to_reg_out:OUT std_logic
 );
 end entity writeback_stage;
 
@@ -99,5 +101,7 @@ ldm_out <= buff_ldm;
 addr_Rdst_out <= buff_addr_Rdst;
 empty_sp_exception_out <= buff_empty_sp_exception;
 invalid_address_exception_out <= buff_invalid_address_exception;
-
+memory_data_out<=buff_memory_data(15 downto 0);
+in_port_val_out<=buff_inport_val;
+mem_to_reg_out<=buff_mem_to_reg;
 end arch1;

@@ -47,12 +47,14 @@ architecture rtl of Integration is
     signal addr_Rsrc1_M, addr_Rsrc2_M, addr_Rdst_M: std_logic_vector(2 downto 0);
     signal alu_result_M, immediate_value_M: std_logic_vector(15 downto 0);
     signal memory_data_M, pc_M: std_logic_vector(31 downto 0);
-
     -- WriteBack Output
     signal immediate_value_W, alu_result_W, writeback_mux_W: std_logic_vector(15 downto 0);
     signal writeback_sig_W, port_read_sig_W, ldm_sig_W: std_logic;
     signal addr_Rdst_W: std_logic_vector(2 downto 0);
     signal empty_sp_exception_W, invalid_address_exception_W: std_logic;
+    signal  memory_data_W: std_logic_vector(15 downto 0);
+    signal inport_val_W : STD_LOGIC_VECTOR(15 downto 0);
+    signal mem_to_reg_W: std_logic;
 begin
 
     fetch_stahe: entity work.Fetch port map(clk, reset, instruction, PC, inport_val, inport_val_F);
@@ -85,8 +87,8 @@ begin
                                     Rsrc1_addr_D , Rsrc2_addr_D, Rdst_D,
                                     PC_D,
                                     aluout_E, alu_result_W, immediate_E, immediate_value_W,
-                                    inport_val_D,
-                                    writeback_sig_E, writeback_sig_W, ldm_sig_E, ldm_sig_W, port_read_sig_E, port_read_sig_W,
+                                    inport_val_D,inport_val_E,inport_val_W,memory_data_W,
+                                    writeback_sig_E, writeback_sig_W, ldm_sig_E, ldm_sig_W, port_read_sig_E, port_read_sig_W,mem_to_reg_W,
                                     destadd_E, addr_Rdst_W,
                                     writeback_sig_E, ldm_sig_E, port_read_sig_E, mem_to_reg_sig_E,
                                     pc_to_stack_sig_E,mem_write_sig_E,mem_read_sig_E,
@@ -121,6 +123,7 @@ begin
                                     writeback_sig_W, port_read_sig_W, ldm_sig_W,
                                     addr_Rdst_W,
                                     empty_sp_exception_W, invalid_address_exception_W,
-                                    epc
+                                    epc,
+                                    memory_data_W,inport_val_W,mem_to_reg_W
                                     );
 end architecture;
