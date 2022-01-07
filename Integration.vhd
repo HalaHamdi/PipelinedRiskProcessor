@@ -81,9 +81,10 @@ begin
                                     pc_E
                                     );
     memory_stage: entity work.memory_stage port map(reset, clk,
+                                    stack_sig_E,
                                     writeback_sig_E, ldm_sig_E, port_read_sig_E, mem_to_reg_sig_E,
                                     pc_to_stack_sig_E,mem_read_sig_E, mem_write_sig_E,
-                                    rti_sig_E,ret_sig_E,int_sig_E,call_sig_E,
+                                    rti_sig_E,ret_sig_E,call_sig_E,int_sig_E,
                                     src1add_E,scr2add_E,destadd_E,
                                     aluout_E,immediate_E,scr1_E,
                                     pc_E,
@@ -94,6 +95,7 @@ begin
                                     pc_M
                                     );
     writeback_stage: entity work.writeback_stage port map(reset, clk,
+                                    -- in_port_val,
                                     empty_sp_exception_M, invalid_address_exception_M,
                                     writeback_sig_M, ldm_sig_M, port_read_sig_M, mem_to_reg_sig_M,
                                     addr_Rsrc1_M, addr_Rsrc2_M, addr_Rdst_M,
@@ -103,5 +105,6 @@ begin
                                     writeback_sig_W, port_read_sig_W, ldm_sig_W,
                                     addr_Rdst_W,
                                     empty_sp_exception_W, invalid_address_exception_W
+                                    -- ,epc
                                     );
 end architecture;

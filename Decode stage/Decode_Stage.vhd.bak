@@ -43,9 +43,9 @@ BEGIN
         Rsrc1_sig,Rsrc2_sig , Rdst_data_wb , write_back , clk , rst
     );
     hdu: entity work.HDU PORT MAP (Rsrc1_addr_in ,Rsrc2_addr_in,buff2_Rdst_addr,buff2_memread, freeze_pc , disable_buff , clear_sig );
-    PROCESS(clk , rst , clear_sig)
+    PROCESS(clk , clear_sig, rst)
 	BEGIN
-        IF (rst = '1') then
+        IF (rst = '1') THEN
             call <= '0';
             memread<='0';
             memwrite <=  '0';
@@ -59,10 +59,8 @@ BEGIN
             mem_to_pc <= '0';
             rti <= '0';
             ret<= '0';
-            stack <= "00";
-            aluop <= "011";
-        elsif (rising_edge(clk)) THEN
-            if (clear_sig = '1') then
+        ELSE (rising_edge(clk)) THEN
+            IF(clear_signals = '1') THEN
                 call <= '0';
                 memread<='0';
                 memwrite <=  '0';
@@ -78,7 +76,7 @@ BEGIN
                 ret<= '0';
                 stack <= "00";
                 aluop <= "011";
-            else 
+            ELSE
                 call <= call_sig;
                 memread<= memread_sig;
                 memwrite <=  memwrite_sig;
@@ -94,15 +92,15 @@ BEGIN
                 ret<= ret_sig;
                 stack <= stack_sig;
                 aluop <= aluop_sig;
-            END if;
-            Rsrc1 <= Rsrc1_sig;
-            Rsrc2 <= Rsrc2_sig;
-            pc <= pc_in;
-            family <= family_in;
-            Rsrc1_addr <= Rsrc1_addr_in;
-            Rsrc2_addr <= Rsrc2_addr_in;
-            offset <= offset_in;
-            Rdst <= Rdst_addr_in;
+            END IF;
+        Rsrc1 <= Rsrc1_sig;
+        Rsrc2 <= Rsrc2_sig;
+        pc <= pc_in;
+        family <= family_in;
+        Rsrc1_addr <= Rsrc1_addr_in;
+        Rsrc2_addr <= Rsrc2_addr_in;
+        offset <= offset_in;
+        Rdst <= Rdst_addr_in;
         END IF;
     END PROCESS;
 END decode_stage_imp;
