@@ -5,9 +5,9 @@ USE IEEE.numeric_std.all;
 ENTITY ExStage IS 
 	PORT(clk,rst,alusrc:IN std_logic;
 	     aluop:IN std_logic_vector(2 DOWNTO 0);
-	     stack_in:In std_logic_vector(1 DOWNTO 0);
+	     stack_in,int_in:In std_logic_vector(1 DOWNTO 0);
 	     immediate_in,src1_in,src2:IN std_logic_vector(15 DOWNTO 0);
-	     writeback_in, ldm_in, port_read_in,port_write, mem_to_reg_in,pc_to_stack_in,mem_write_in,mem_read_in,rti_in,int_in,ret_in,call_in: IN std_logic;
+	     writeback_in, ldm_in, port_read_in,port_write, mem_to_reg_in,pc_to_stack_in,mem_write_in,mem_read_in,rti_in,ret_in,call_in: IN std_logic;
 	     addr_Rsrc1_in, addr_Rsrc2_in, addr_Rdst_in: IN std_logic_vector(2 downto 0);
 	     pc_in: IN std_logic_vector(31 downto 0);
 	     buff3_alu,buff4_alu,buff3_imm,buff4_imm,in_port: IN std_logic_vector(15 DOWNTO 0);
@@ -15,8 +15,8 @@ ENTITY ExStage IS
 	     buff3_address_dest,buff4_address_dest:IN std_logic_vector(2 DOWNTO 0);
 --these 3 buffs lines were added 
 --added port_write 
-	     writeback_out, ldm_out, port_read_out, mem_to_reg_out,pc_to_stack_out,mem_write_out,mem_read_out,rti_out,int_out,ret_out,call_out: OUT std_logic;
-	     stack_out:OUT std_logic_vector(1 DOWNTO 0);
+	     writeback_out, ldm_out, port_read_out, mem_to_reg_out,pc_to_stack_out,mem_write_out,mem_read_out,rti_out,ret_out,call_out: OUT std_logic;
+	     stack_out,int_out:OUT std_logic_vector(1 DOWNTO 0);
 	     src1add_out,scr2add_out,destadd_out:OUT std_logic_vector(2 DOWNTO 0);
 	     aluout_out,scr1_out,immediate_out:OUT std_logic_vector (15 DOWNTO 0);
 	     pc_out:OUT std_logic_vector (31 DOWNTO 0)
@@ -38,7 +38,7 @@ signal fu_sig2:std_logic_vector(2 DOWNTO 0);
 signal out_reg_q:std_logic_vector(15 DOWNTO 0);
 signal flags_reserved_out:std_logic_vector(3 DOWNTO 0);
 signal flags_reg_in:std_logic_vector(3 DOWNTO 0);
-
+signal flag_reserved_reg_enable:std_logic:=int_in(0) or int_in(1);
 
 BEGIN		
 mux1: entity work.exmux1 port map (alusrc,immediate_in,src2,mux1result);
@@ -50,17 +50,17 @@ mux3: entity work.exmux3 port map (fu_sig2,mux1result,buff3_alu,buff4_alu,buff3_
 out_reg: entity work.OutPortReg port map (port_write,clk,rst,alu_operand1,out_reg_q);
 alu: entity work.alu port map(aluop,alu_operand1,alu_operand2,flags,aluout,aluflagsout);
 flagreg: entity work.flagreg port map('1',clk,rst,flags_reg_in,flags);
-flag_reserved_reg: entity work.flagreg port map(int_in,clk,rst,flags,flags_reserved_out);
+flag_reserved_reg: entity work.flagreg port map(flag_reserved_reg_enable,clk,rst,flags,flags_reserved_out);
 mux4: entity work.exmux4 port map (rti_in,aluflagsout,flags_reserved_out,flags_reg_in);
 buff: entity work.ExMemBuff port map(clk, rst, 
-					 stack_in,
+				     stack_in,int_in,
 				     addr_Rsrc1_in, addr_Rsrc2_in, addr_Rdst_in,
 				     aluout,src1_in,immediate_in,
 				     pc_in,
-				     writeback_in, ldm_in, port_read_in, mem_to_reg_in,pc_to_stack_in,mem_write_in,mem_read_in,rti_in,int_in,ret_in,call_in,
+				     writeback_in, ldm_in, port_read_in, mem_to_reg_in,pc_to_stack_in,mem_write_in,mem_read_in,rti_in,ret_in,call_in,
 					 
-				     writeback_out, ldm_out, port_read_out, mem_to_reg_out,pc_to_stack_out,mem_write_out,mem_read_out,rti_out,int_out,ret_out,call_out,
-				     stack_out,
+				     writeback_out, ldm_out, port_read_out, mem_to_reg_out,pc_to_stack_out,mem_write_out,mem_read_out,rti_out,ret_out,call_out,
+				     stack_out,int_out,
 				     src1add_out,scr2add_out,destadd_out,
 				     aluout_out,scr1_out,immediate_out,
 				     pc_out

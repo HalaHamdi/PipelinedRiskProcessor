@@ -65,7 +65,7 @@ force -freeze sim:/exstage/src1_in 10#2 0
 force -freeze sim:/exstage/src2 10#3 0
 force -freeze sim:/exstage/port_write 0 0
 force -freeze sim:/exstage/rti_in 0 0
-force -freeze sim:/exstage/int_in 0 0
+force -freeze sim:/exstage/int_in 00 0
 force -freeze sim:/exstage/addr_Rsrc1_in 000 0
 force -freeze sim:/exstage/addr_Rsrc2_in 001 0
 force -freeze sim:/exstage/addr_Rdst_in 010 0
@@ -101,7 +101,7 @@ force -freeze sim:/exstage/alusrc 0 0
 force -freeze sim:/exstage/addr_Rsrc2_in 011 0
 run
 force -freeze sim:/exstage/port_write 1 0
-force -freeze sim:/exstage/int_in 1 0
+force -freeze sim:/exstage/int_in 01 0
 run
 force -freeze sim:/exstage/in_port 10#0 0
 run
@@ -112,9 +112,9 @@ run
 run
 force -freeze sim:/exstage/immediate_in 0000000000000000 0
 force -freeze sim:/exstage/rti_in 1 0
-force -freeze sim:/exstage/int_in 0 0
+force -freeze sim:/exstage/int_in 00 0
 run
 force -freeze sim:/exstage/rti_in 0 0
-force -freeze sim:/exstage/int_in 1 0
+force -freeze sim:/exstage/int_in 10 0
 run
 run
