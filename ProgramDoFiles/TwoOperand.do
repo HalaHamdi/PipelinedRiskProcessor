@@ -16,3 +16,27 @@ run
 force -freeze sim:/integration/reset 0 0
 force -freeze sim:/integration/inport_val 16#5 0
 run
+run
+force -freeze sim:/integration/inport_val 16#19 0
+run
+force -freeze sim:/integration/inport_val 16#FFFF 0
+run
+force -freeze sim:/integration/inport_val 16#F320 0
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
