@@ -27,8 +27,8 @@ ENTITY decode_stage IS
         inport_val_out: OUT STD_LOGIC_VECTOR(15 downto 0);
         -- Third Integration Signals
         exception_stack , exception_invalid : IN STD_LOGIC ;
-        int_in :IN STD_LOGIC ;
-        int_out :OUT STD_LOGIC ;
+        int_in :IN  STD_LOGIC_VECTOR(1 downto 0) ;
+        int_out :OUT  STD_LOGIC_VECTOR(1 downto 0) ;
         func_out : out STD_LOGIC_VECTOR(2 downto 0)
     );
 END decode_stage;
@@ -50,10 +50,26 @@ BEGIN
         Rsrc1_sig,Rsrc2_sig , Rdst_data_wb , write_back , clk , rst
     );
     hdu: entity work.HDU PORT MAP (Rsrc1_addr_in ,Rsrc2_addr_in,buff2_Rdst_addr,buff2_memread, freeze_pc , disable_buff , clear_sig );
-    PROCESS(clk )
+    PROCESS(clk , clear_sig)
 	BEGIN
-        if (rising_edge(clk)) THEN
-            if (clear_sig = '1' OR rst = '1' OR exception_stack = '1' OR exception_invalid = '1') then
+        if(clear_sig = '1') THEN
+            call <= '0';
+            memread<='0';
+            memwrite <=  '0';
+            alusrc <= '0';
+            pc_to_stack <= '0';
+            ldm <= '0';
+            memtoreg<= '0';
+            regwrite <= '0';
+            portread <= '0';
+            portwrite <= '0';
+            mem_to_pc <= '0';
+            rti <= '0';
+            ret<= '0';
+            stack <= "00";
+            aluop <= "011";
+        elsif (rising_edge(clk)) THEN
+            if ( rst = '1' OR exception_stack = '1' OR exception_invalid = '1') then
                 call <= '0';
                 memread<='0';
                 memwrite <=  '0';
