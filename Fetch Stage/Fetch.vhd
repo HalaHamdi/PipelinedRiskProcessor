@@ -71,7 +71,7 @@ begin
     Buff: entity work.FDBuffer port map(clk, '1', '0', PC_prev, output, reset, 
                                                         PC, instruction, Buff1_reset,
                                                         inport_val_in, inport_val_out,
-                                                        int, int_out);
+                                                        int, buff1_int);
 
     output <= "00000000000000000010011000000000" when (reset = '1' or Buff1_reset = '1' or 
                                                         int = "01" or int = "10" or
@@ -85,15 +85,16 @@ begin
             "10" when mem_out(13 downto 9) = "11011" and mem_out(2 downto 0) = "010" else
             "00";
 
-    state <= "11" when mem_out(13 downto 9) = "10111" or mem_out(13 downto 9) = "11111";
-    buff1_int <= int;
-        
+    int_out <= buff1_int;
+
     process (clk)
     begin
         if rising_edge(clk) then
             PC_prev <= PC_out;
+            if mem_out(13 downto 9) = "10111" or mem_out(13 downto 9) = "11111" then
+                state <= "11";
 
-            if state /= "00" then
+            elsif state /= "00" then
                 state <= state - 1;
             end if;
 

@@ -103,6 +103,6 @@ operands = {
              "pos": {"dst": 1}},
 
     "ret": {"names": [], "pos": ""},
-    "int": {"names": [], "pos": ""},
+    "int": {"names": ["index"], "pos": {"index" : 1}},
     "rti": {"names": [], "pos": ""}
 }
