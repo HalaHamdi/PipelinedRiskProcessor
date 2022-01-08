@@ -1,6 +1,7 @@
 
 LIBRARY IEEE;
 USE IEEE.std_logic_1164.all;
+use IEEE.STD_LOGIC_UNSIGNED.ALL;
 USE IEEE.numeric_std.all;
 USE work.config.all;
 
@@ -21,13 +22,15 @@ TYPE ram_type is Array(0 to DATA_MEMORY_SIZE) of std_logic_vector(15 downto 0);
 signal mem: ram_type;
 begin
 process (Clk) is
+variable pc_added_1 : std_logic_vector(31 downto 0);
 begin
 if (falling_edge(Clk)) then
 	if (mem_write = '1') then
 	
 		if (pc_to_stack = '1') then
-			mem(to_integer(unsigned(address))-1) <= data_in(15 downto 0);
-			mem(to_integer(unsigned(address))) <= data_in(31 downto 16);
+			pc_added_1 := data_in + 1;
+			mem(to_integer(unsigned(address))-1) <= pc_added_1(15 downto 0);
+			mem(to_integer(unsigned(address))) <= pc_added_1(31 downto 16);
 		else
 			mem(to_integer(unsigned(address))) <= data_in(15 downto 0);
 		end if;
