@@ -24,7 +24,11 @@ ENTITY decode_stage IS
         buff2_memread : IN STD_LOGIC ;
         freeze_pc , disable_buff  : OUT STD_LOGIC;
         inport_val_in: IN STD_LOGIC_VECTOR(15 downto 0);
-        inport_val_out: OUT STD_LOGIC_VECTOR(15 downto 0)
+        inport_val_out: OUT STD_LOGIC_VECTOR(15 downto 0);
+        -- Third Integration Signals
+        exception_in : IN STD_LOGIC ;
+        int_in :IN STD_LOGIC ;
+        int_out :OUT STD_LOGIC 
     );
 END decode_stage;
 
@@ -47,7 +51,7 @@ BEGIN
     hdu: entity work.HDU PORT MAP (Rsrc1_addr_in ,Rsrc2_addr_in,buff2_Rdst_addr,buff2_memread, freeze_pc , disable_buff , clear_sig );
     PROCESS(clk , rst , clear_sig)
 	BEGIN
-        IF (rst = '1') then
+        IF (rst = '1') OR (exception_in = '1') then
             call <= '0';
             memread<='0';
             memwrite <=  '0';
@@ -106,6 +110,7 @@ BEGIN
             offset <= offset_in;
             Rdst <= Rdst_addr_in;
             inport_val_out <= inport_val_in;
+            int_out <= int_in;
         END IF;
     END PROCESS;
 END decode_stage_imp;
