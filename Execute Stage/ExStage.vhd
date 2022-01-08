@@ -17,11 +17,12 @@ ENTITY ExStage IS
 	     family_code:IN std_logic_vector(1 downto 0);
 --added family_code and function_code in in
 --added flags_q and sig_jump in out
---added sp_exception,invalid_address
+--added sp_exception,invalid_address in in
+--added src1_fu in out
 	     writeback_out, ldm_out, port_read_out, mem_to_reg_out,pc_to_stack_out,mem_write_out,mem_read_out,rti_out,ret_out,call_out: OUT std_logic;
 	     stack_out,int_out:OUT std_logic_vector(1 DOWNTO 0);
 	     src1add_out,scr2add_out,destadd_out:OUT std_logic_vector(2 DOWNTO 0);
-	     aluout_out,scr2_out,immediate_out:OUT std_logic_vector (15 DOWNTO 0);
+	     aluout_out,scr2_out,immediate_out,src1_fu:OUT std_logic_vector (15 DOWNTO 0);
 	     pc_out:OUT std_logic_vector (31 DOWNTO 0);
 		 inport_val_out: OUT std_logic_vector (15 DOWNTO 0);
 		flags_q: OUT std_logic_vector(3 downto 0);
@@ -82,5 +83,6 @@ buff: entity work.ExMemBuff port map(clk, rst,sp_exception,invalid_address,
 					 );
 
 flags_q <= flags;
-		
+src1_fu <= alu_operand1;
+	
 END ExStage; 
