@@ -23,7 +23,7 @@ begin
 	if(rst = '1') then
 		new_sp <= INITIAL_SP; -- intial sp value is at the very end of the memory
 	elsif (falling_edge(Clk)) then
-		if (call = '1' or int /= "00") then
+		if (call = '1' or int = "01" or int = "10") then
 		updated_sp_value := to_integer(unsigned(old_sp)) - 2;
 
 		elsif (rti = '1' or ret = '1') then

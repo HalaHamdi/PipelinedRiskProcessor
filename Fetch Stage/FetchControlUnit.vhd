@@ -56,7 +56,7 @@ begin
                                     (family = "01" AND (func = "010"    OR 
                                                         func = "011"    OR 
                                                         func = "110"))  else
-        jump_add            when    is_jump = '1'                       else
+        ((31 downto 16 => '0') & jump_add)            when    is_jump = '1'                       else
         mem_out             when    mem_to_pc = '1'                     else
         std_logic_vector(to_unsigned(6, 32)) when  int = "01"           else
         std_logic_vector(to_unsigned(8, 32)) when  int = "10"           else

@@ -73,8 +73,7 @@ begin
                                                         inport_val_in, inport_val_out,
                                                         int, buff1_int);
 
-    output <= "00000000000000000010011000000000" when (reset = '1' or Buff1_reset = '1' or 
-                                                        int = "01" or int = "10" or
+    output <= "00000000000000000000110000000000" when (reset = '1' or Buff1_reset = '1' or 
                                                         sp_exp = '1' or add_exp='1' or
                                                         buff1_int = "01" or buff1_int ="10" or
                                                         buff4_sp_exp = '1' or buff4_add_exp = '1' or

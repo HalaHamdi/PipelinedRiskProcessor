@@ -31,7 +31,7 @@ begin
             if flash = '1' then
                 PC_out <= (others => '0');
                 Instruction_out  <= (others => '0');
-
+                int_out <= "00";
             elsif enable = '1' then 
                 PC_out <= PC_in;
                 Instruction_out  <= Instruction_in;
