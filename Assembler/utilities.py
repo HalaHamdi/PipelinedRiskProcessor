@@ -87,22 +87,22 @@ operands = {
     "ldm":  {"names": ["dst", "offset"],
              "pos": {"dst": 1, "offset": 2}},
 
-    "jz":   {"names": ['dst'],
-             "pos": {"dst": 1}},
+    "jz":   {"names": ['src1'],
+             "pos": {"src1": 1}},
 
-    "jc":   {"names": ['dst'],
-             "pos": {"dst": 1}},
+    "jc":   {"names": ['src1'],
+             "pos": {"src1": 1}},
 
-    "jn":   {"names": ['dst'],
-             "pos": {"dst": 1}},
+    "jn":   {"names": ['src1'],
+             "pos": {"src1": 1}},
 
-    "jmp":  {"names": ['dst'],
-             "pos": {"dst": 1}},
+    "jmp":  {"names": ['src1'],
+             "pos": {"src1": 1}},
 
     "call": {"names": ['dst'],
              "pos": {"dst": 1}},
 
     "ret": {"names": [], "pos": ""},
-    "int": {"names": ["index"], "pos": {"index" : 1}},
+    "int": {"names": ["index"], "pos": {"index": 1}},
     "rti": {"names": [], "pos": ""}
 }

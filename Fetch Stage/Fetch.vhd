@@ -41,7 +41,7 @@ architecture Fetch_arch of Fetch is
     signal output       : std_logic_vector(31 downto 0);
     signal PC_prev      : std_logic_vector(31 downto 0);
     signal int          : std_logic_vector(1 downto 0);
-    signal state : std_logic_vector(1 downto 0) := "00";
+    signal state : std_logic_vector(2 downto 0) := "000";
 begin
 
     CU: entity work.FetchControlUnit    port    map(mem_out(10 Downto 9), 
@@ -77,7 +77,7 @@ begin
                                                         sp_exp = '1' or add_exp='1' or
                                                         buff1_int = "01" or buff1_int ="10" or
                                                         buff4_sp_exp = '1' or buff4_add_exp = '1' or
-                                                        state /= "00") 
+                                                        state /= "000") 
     else mem_out;
     
     int <=  "01" when mem_out(13 downto 9) = "11011" and mem_out(2 downto 0) = "000" else
@@ -91,12 +91,11 @@ begin
         if rising_edge(clk) then
             PC_prev <= PC_out;
             if mem_out(13 downto 9) = "10111" or mem_out(13 downto 9) = "11111" then
-                state <= "11";
+                state <= "100";
 
-            elsif state /= "00" then
+            elsif state /= "000" then
                 state <= state - 1;
             end if;
-
         end if;
     end process;
 

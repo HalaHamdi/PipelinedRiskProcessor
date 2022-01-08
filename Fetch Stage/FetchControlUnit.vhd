@@ -51,7 +51,7 @@ begin
                                     buff4_sp_exp = '1'                  or
                                     buff4_add_exp = '1'                 else
 
-        PC                  WHEN    (family = "11" AND  func = "000")   else
+        PC                  WHEN    (family = "10" AND  func = "000")   else
         PC + 2              WHEN    (family = "00" AND  func = "111")   OR
                                     (family = "01" AND (func = "010"    OR 
                                                         func = "011"    OR 
