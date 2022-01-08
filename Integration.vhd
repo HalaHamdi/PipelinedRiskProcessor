@@ -82,7 +82,7 @@ begin
                                     Rsrc1_sig_D , Rsrc2_sig_D, offset_D,
                                     Rsrc1_addr_D , Rsrc2_addr_D,
                                     Rdst_D,
-                                    destadd_E, mem_read_sig_E,
+                                    Rsrc2_addr_D, memread_sig_D,
                                     freeze_pc_D, disable_buff_D,
                                     inport_val_F, inport_val_D,
                                     empty_sp_exception_M, invalid_address_exception_M,

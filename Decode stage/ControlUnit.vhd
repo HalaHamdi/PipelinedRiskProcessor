@@ -96,7 +96,7 @@ elsif (family = "11") AND (func = "101") then
      signals <= "001101001000001010";
 -- INT
 elsif (family = "11") AND (func = "110") then 
-     signals <= "001110000100011000";
+     signals <= "001110000100010000";
 -- RTI
 elsif (family = "11") AND (func = "111") then 
      signals <= "001101001000001100";

@@ -49,7 +49,7 @@ BEGIN
     register_file : entity  work.registerfile PORT MAP (Rsrc1_addr_in , Rsrc2_addr_in,Rdst_addr_wb,
         Rsrc1_sig,Rsrc2_sig , Rdst_data_wb , write_back , clk , rst
     );
-    hdu: entity work.HDU PORT MAP (Rsrc1_addr_in ,Rsrc2_addr_in,buff2_Rdst_addr,buff2_memread, freeze_pc , disable_buff , clear_sig );
+    hdu: entity work.HDU PORT MAP (clk, Rsrc1_addr_in ,Rsrc2_addr_in,buff2_Rdst_addr,buff2_memread, freeze_pc , disable_buff , clear_sig );
     PROCESS(clk , clear_sig)
 	BEGIN
         if(clear_sig = '1') THEN
