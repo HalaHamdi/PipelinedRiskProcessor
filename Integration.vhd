@@ -86,7 +86,7 @@ begin
                                     freeze_pc_D, disable_buff_D,
                                     inport_val_F, inport_val_D,
                                     empty_sp_exception_M, invalid_address_exception_M,
-                                    int_F, int_D, func_D
+                                    int_F, int_D, func_D  ,sig_jump_E
                                     );
     execute_stage: entity work.ExStage port map(clk, reset, alusrc_sig_D,
                                     empty_sp_exception_M, invalid_address_exception_M,
