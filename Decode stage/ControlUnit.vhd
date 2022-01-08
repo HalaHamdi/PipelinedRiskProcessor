@@ -69,7 +69,7 @@ elsif (family = "01") AND (func = "011") then
      signals <= "010010000000000000";
 -- PUSH
 elsif (family = "01") AND (func = "100") then 
-     signals <= "001110000100000000";
+     signals <= "101110000100000000";
 -- POP
 elsif (family = "01") AND (func = "101") then 
      signals <= "001101111000000000";

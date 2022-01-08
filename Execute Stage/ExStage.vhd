@@ -57,7 +57,7 @@ mux4: entity work.exmux4 port map (rti_in,aluflagsout,flags_reserved_out,flags_r
 buff: entity work.ExMemBuff port map(clk, rst, 
 				     stack_in,int_in,
 				     addr_Rsrc1_in, addr_Rsrc2_in, addr_Rdst_in,
-				     aluout,src2,immediate_in,
+				     aluout,alu_operand2,immediate_in,
 				     pc_in,
 				     writeback_in, ldm_in, port_read_in, mem_to_reg_in,pc_to_stack_in,mem_write_in,mem_read_in,rti_in,ret_in,call_in,
 					 in_port,

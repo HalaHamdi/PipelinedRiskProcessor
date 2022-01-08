@@ -25,8 +25,8 @@ fu_sig1 <= "000" WHEN ((buff2_address_src1 = buff3_address_dest) and buff3_portr
 		ELSE "010" WHEN ((buff2_address_src1 = buff3_address_dest) and buff3_ldm = '1' )
 		ELSE "011" WHEN ((buff2_address_src1 = buff4_address_dest) and buff4_ldm = '1' )
 		ELSE "100" WHEN ((buff2_address_src1 = buff3_address_dest) and buff3_wb = '1' )
-		ELSE "101" WHEN ((buff2_address_src1 = buff4_address_dest) and buff4_wb = '1' )
 		ELSE "110" WHEN ((buff2_address_src1 = buff4_address_dest) and buff4_memread = '1' )
+		ELSE "101" WHEN ((buff2_address_src1 = buff4_address_dest) and buff4_wb = '1' )
 		ELSE "111";
 
 fu_sig2 <= "000" WHEN ((buff2_address_src2 = buff3_address_dest) and buff3_portr = '1' ) 
@@ -34,7 +34,7 @@ fu_sig2 <= "000" WHEN ((buff2_address_src2 = buff3_address_dest) and buff3_portr
 		ELSE "010" WHEN ((buff2_address_src2 = buff3_address_dest) and buff3_ldm = '1' )
 		ELSE "011" WHEN ((buff2_address_src2 = buff4_address_dest) and buff4_ldm = '1' )
 		ELSE "100" WHEN ((buff2_address_src2 = buff3_address_dest) and buff3_wb = '1' )
-		ELSE "101" WHEN ((buff2_address_src2 = buff4_address_dest) and buff4_wb = '1' )
 		ELSE "110" WHEN ((buff2_address_src2 = buff4_address_dest) and buff4_memread = '1' )
+		ELSE "101" WHEN ((buff2_address_src2 = buff4_address_dest) and buff4_wb = '1' )
 		ELSE "111";
 END FU;
