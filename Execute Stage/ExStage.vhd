@@ -13,20 +13,19 @@ ENTITY ExStage IS
 	     buff3_alu,buff4_alu,buff3_imm,buff4_imm,in_port,buff3_in_port,buff4_in_port,buff4_mem_val: IN std_logic_vector(15 DOWNTO 0);
 	     buff3_wb,buff4_wb,buff3_ldm,buff4_ldm,buff3_portr,buff4_portr,buff4_mem_read:IN std_logic;
 	     buff3_address_dest,buff4_address_dest:IN std_logic_vector(2 DOWNTO 0);
-	     function_code:IN std_logic_vector(2 downto 0);
+	     mem_to_pc_in: IN std_logic;
+		 function_code:IN std_logic_vector(2 downto 0);
 	     family_code:IN std_logic_vector(1 downto 0);
---added family_code and function_code in in
---added flags_q and sig_jump in out
---added sp_exception,invalid_address in in
---added src1_fu in out
+
 	     writeback_out, ldm_out, port_read_out, mem_to_reg_out,pc_to_stack_out,mem_write_out,mem_read_out,rti_out,ret_out,call_out: OUT std_logic;
 	     stack_out,int_out:OUT std_logic_vector(1 DOWNTO 0);
 	     src1add_out,scr2add_out,destadd_out:OUT std_logic_vector(2 DOWNTO 0);
 	     aluout_out,scr2_out,immediate_out,src1_fu:OUT std_logic_vector (15 DOWNTO 0);
 	     pc_out:OUT std_logic_vector (31 DOWNTO 0);
 		 inport_val_out: OUT std_logic_vector (15 DOWNTO 0);
-		flags_q: OUT std_logic_vector(3 downto 0);
-		sig_jump :OUT std_logic
+		 mem_to_pc_out: OUT std_logic;
+		 flags_q: OUT std_logic_vector(3 downto 0);
+		 sig_jump :OUT std_logic
 		 );
 
 END ENTITY ExStage;
@@ -67,7 +66,7 @@ flag_reserved_reg: entity work.flagreg port map(flag_reserved_reg_enable,clk,rst
 mux4: entity work.exmux4 port map (rti_in,aluflagsout,flags_reserved_out,flags_reg_in);
 
 jdu: entity work.jdu port map (family_code,function_code,flags,sig_jump);
-buff: entity work.ExMemBuff port map(clk, rst,sp_exception,invalid_address, 
+buff: entity work.ExMemBuff port map(mem_to_pc_in, clk, rst,sp_exception,invalid_address, 
 				     stack_in,int_in,
 				     addr_Rsrc1_in, addr_Rsrc2_in, addr_Rdst_in,
 				     aluout,mux3result,immediate_in,   --mux3result to be changed if noran needs another thing
@@ -79,7 +78,7 @@ buff: entity work.ExMemBuff port map(clk, rst,sp_exception,invalid_address,
 				     stack_out,int_out,
 				     src1add_out,scr2add_out,destadd_out,
 				     aluout_out,scr2_out,immediate_out,
-				     pc_out, inport_val_out
+				     pc_out, inport_val_out, mem_to_pc_out
 					 );
 
 flags_q <= flags;
