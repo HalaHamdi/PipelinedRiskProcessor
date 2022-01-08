@@ -29,7 +29,8 @@ ENTITY decode_stage IS
         exception_stack , exception_invalid : IN STD_LOGIC ;
         int_in :IN  STD_LOGIC_VECTOR(1 downto 0) ;
         int_out :OUT  STD_LOGIC_VECTOR(1 downto 0) ;
-        func_out : out STD_LOGIC_VECTOR(2 downto 0)
+        func_out : out STD_LOGIC_VECTOR(2 downto 0);
+        jump : IN STD_LOGIC
     );
 END decode_stage;
 
@@ -69,7 +70,7 @@ BEGIN
             stack <= "00";
             aluop <= "011";
         elsif (rising_edge(clk)) THEN
-            if ( rst = '1' OR exception_stack = '1' OR exception_invalid = '1') then
+            if ( rst = '1' OR exception_stack = '1' OR exception_invalid = '1' OR jump = '1') then
                 call <= '0';
                 memread<='0';
                 memwrite <=  '0';
