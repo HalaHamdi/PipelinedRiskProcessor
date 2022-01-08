@@ -3,7 +3,7 @@ USE IEEE.std_logic_1164.all;
 
 
 ENTITY ExMemBuff IS
-	PORT(clk,rst:IN std_logic;
+	PORT(clk,rst ,sp_exception,invalid_address:IN std_logic;
 	     stack_in,int_in:In std_logic_vector(1 DOWNTO 0);
 	     src1add_in,scr2add_in,destadd_in:IN std_logic_vector(2 DOWNTO 0);
 	     aluout_in,scr2_in,immediate_in:IN std_logic_vector (15 DOWNTO 0);
@@ -27,7 +27,7 @@ BEGIN
 	
 	PROCESS(clk)
 	BEGIN
-		IF (rst='1') THEN
+		IF (rst='1' or sp_exception ='1' or invalid_address='1') THEN
 			stack_out<="00";
 			writeback_out <='0';
 			ldm_out<='0';

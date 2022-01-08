@@ -1,0 +1,32 @@
+vsim -gui work.jdu
+# vsim -gui work.jdu 
+# Start time: 15:19:48 on Jan 08,2022
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.jdu(jdu)
+add wave -position insertpoint  \
+sim:/jdu/family_code \
+sim:/jdu/function_code \
+sim:/jdu/flags \
+sim:/jdu/sig_jump
+force -freeze sim:/jdu/family_code 00 0
+force -freeze sim:/jdu/function_code 000 0
+force -freeze sim:/jdu/flags 0111 0
+run
+force -freeze sim:/jdu/family_code 11 0
+run
+force -freeze sim:/jdu/function_code 111 0
+run
+force -freeze sim:/jdu/function_code 001 0
+run
+force -freeze sim:/jdu/flags 0011 0
+run
+force -freeze sim:/jdu/function_code 010 0
+run
+force -freeze sim:/jdu/function_code 011 0
+force -freeze sim:/jdu/flags 0000 0
+run
+force -freeze sim:/jdu/function_code 010 0
+run
