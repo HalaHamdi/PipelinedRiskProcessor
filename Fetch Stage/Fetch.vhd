@@ -16,7 +16,6 @@ entity Fetch is
         sp_exp      : In std_logic;
         add_exp     : In std_logic;
 
-        buff1_int   : In std_logic_vector (1 downto 0);
         buff4_sp_exp : In std_logic;
         buff4_add_exp : In std_logic;
 
@@ -34,6 +33,7 @@ end entity;
 architecture Fetch_arch of Fetch is
 
     signal Buff1_reset  : std_logic;
+    signal buff1_int    : std_logic_vector(1 downto 0);
     signal CU_out       : std_logic_vector(31 downto 0);
     signal mem_out      : std_logic_vector(31 downto 0);
     signal PC_out       : std_logic_vector(31 downto 0);
@@ -86,7 +86,8 @@ begin
             "00";
 
     state <= "11" when mem_out(13 downto 9) = "10111" or mem_out(13 downto 9) = "11111";
-    
+    buff1_int <= int;
+        
     process (clk)
     begin
         if rising_edge(clk) then
