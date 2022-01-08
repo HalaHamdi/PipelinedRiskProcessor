@@ -33,7 +33,7 @@ architecture arch1 of writeback_buffer is
 begin
 process(clk, rst)
 begin
-if (rst = '1' or empty_sp_exception_in = '1' or invalid_address_exception_in = '1') then
+if (rst = '1') then
 	empty_sp_exception_out <= '0';
 	invalid_address_exception_out <= '0';
 	writeback_out <= '0';
