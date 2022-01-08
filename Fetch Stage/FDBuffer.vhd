@@ -14,7 +14,9 @@ entity FDBuffer is
         Instruction_out : out std_logic_vector(31 Downto 0);
         reset_out       : out std_logic;
         inport_val_in   : in std_logic_vector(15 Downto 0);
-        inport_val_out   : out std_logic_vector(15 Downto 0)
+        inport_val_out  : out std_logic_vector(15 Downto 0);
+        int             : in std_logic_vector(1 downto 0);
+        int_out         : out std_logic_vector(1 downto 0)
     );
 end entity;
 
@@ -34,6 +36,7 @@ begin
                 PC_out <= PC_in;
                 Instruction_out  <= Instruction_in;
                 inport_val_out <= inport_val_in;
+                int_out <= int;
             end if;
 
         end if;
