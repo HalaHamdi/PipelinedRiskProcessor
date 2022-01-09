@@ -49,12 +49,7 @@ add wave -position 1  sim:/integration/decode_stage/hdu/buff2_memread
 add wave -position 2  sim:/integration/decode_stage/hdu/buff2_Rdst_addr
 add wave -position 3  sim:/integration/decode_stage/hdu/Rsrc1_addr
 add wave -position 4  sim:/integration/decode_stage/hdu/Rsrc2_addr
-add wave -position insertpoint  \sim:/integration/Rdst_D
-add wave -position insertpoint  \sim:/integration/Rsrc2_addr_D \sim:/integration/Rsrc1_addr_D
-add wave -position insertpoint  \sim:/integration/decode_stage/Rdst_addr_in
-add wave -position insertpoint  \sim:/integration/decode_stage/Rdst
-
-
+add wave -position 1  sim:/integration/execute_stage/out_reg_q
 mem load -infile output.mem -format bin /integration/fetch_stahe/Memory/ram
 
 force -freeze sim:/integration/clk 1 0, 0 {50 ps} -r 100
@@ -72,7 +67,18 @@ run
 run
 force -freeze sim:/integration/inport_val 16#10 0
 run
-
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
 run
 run
 run
