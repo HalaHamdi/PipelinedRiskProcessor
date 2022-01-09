@@ -3,7 +3,8 @@ use ieee.std_logic_1164.all;
 USE IEEE.numeric_std.all;
 
 ENTITY ExStage IS 
-	PORT(clk,rst,alusrc,sp_exception,invalid_address:IN std_logic;
+	PORT(disable_buff:IN std_logic;
+		 clk,rst,alusrc,sp_exception,invalid_address:IN std_logic;
 	     aluop:IN std_logic_vector(2 DOWNTO 0);
 	     stack_in,int_in:In std_logic_vector(1 DOWNTO 0);
 	     immediate_in,src1_in,src2:IN std_logic_vector(15 DOWNTO 0);
@@ -74,7 +75,7 @@ flagreg: entity work.flagreg port map('1',clk,rst,mux5res,flags);
 flag_reserved_reg: entity work.flagreg port map(flag_reserved_reg_enable,clk,rst,flags,flags_reserved_out);
 mux4: entity work.exmux4 port map (rti_in,aluflagsout,flags_reserved_out,mux4res);
 
-jdu: entity work.jdu port map (family_code,function_code,flags,jump, flags_jdu_out);
+jdu: entity work.jdu port map (disable_buff,family_code,function_code,flags,jump, flags_jdu_out);
 buff: entity work.ExMemBuff port map(mem_to_pc_in, clk, rst,sp_exception,invalid_address, 
 				     stack_in,int_in,
 				     addr_Rsrc1_in, addr_Rsrc2_in, addr_Rdst_in,

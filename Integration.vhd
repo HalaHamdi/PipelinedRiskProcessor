@@ -34,7 +34,7 @@ architecture rtl of Integration is
     signal Rdst_D, func_D: STD_LOGIC_VECTOR(2 downto 0);
     signal freeze_pc_D, disable_buff_D : std_logic;
     signal inport_val_D : STD_LOGIC_VECTOR(15 downto 0);
-
+    signal disable_buff_out : STD_LOGIC;
     -- Excute Output
     signal writeback_sig_E, ldm_sig_E, port_read_sig_E, mem_to_reg_sig_E,pc_to_stack_sig_E,mem_write_sig_E,mem_read_sig_E,rti_sig_E,ret_sig_E,call_sig_E: std_logic;
 	signal stack_sig_E,int_sig_E: std_logic_vector(1 DOWNTO 0);
@@ -86,9 +86,9 @@ begin
                                     freeze_pc_D, disable_buff_D,
                                     inport_val_F, inport_val_D,
                                     empty_sp_exception_M, invalid_address_exception_M,
-                                    int_F, int_D, func_D  ,sig_jump_E
+                                    int_F, int_D, func_D  ,sig_jump_E,disable_buff_out
                                     );
-    execute_stage: entity work.ExStage port map(clk, reset, alusrc_sig_D,
+    execute_stage: entity work.ExStage port map(disable_buff_out,clk, reset, alusrc_sig_D,
                                     empty_sp_exception_M, invalid_address_exception_M,
                                     aluop_sig_D,
                                     stack_sig_D, int_D,

@@ -30,7 +30,8 @@ ENTITY decode_stage IS
         int_in :IN  STD_LOGIC_VECTOR(1 downto 0) ;
         int_out :OUT  STD_LOGIC_VECTOR(1 downto 0) ;
         func_out : out STD_LOGIC_VECTOR(2 downto 0);
-        jump : IN STD_LOGIC
+        jump : IN STD_LOGIC;
+        disable_buff_out : OUT STD_LOGIC
     );
 END decode_stage;
 
@@ -41,6 +42,7 @@ ARCHITECTURE decode_stage_imp OF decode_stage IS
     SIGNAL stack_sig :  STD_LOGIC_VECTOR(1 downto 0) ;
     SIGNAL aluop_sig :  STD_LOGIC_VECTOR(2 downto 0) ;
     SIGNAL Rsrc1_sig , Rsrc2_sig  :  STD_LOGIC_VECTOR(15 downto 0);
+    SIGNAL disable_buff_sig : STD_LOGIC;
 BEGIN
     control_unit :  entity  work.ControlUnit PORT MAP (family_in , func ,Rsrc1_addr_in ,
     call_sig , memread_sig , memwrite_sig , alusrc_sig , pc_to_stack_sig , ldm_sig , memtoreg_sig
@@ -50,27 +52,11 @@ BEGIN
     register_file : entity  work.registerfile PORT MAP (Rsrc1_addr_in , Rsrc2_addr_in,Rdst_addr_wb,
         Rsrc1_sig,Rsrc2_sig , Rdst_data_wb , write_back , clk , rst
     );
-    hdu: entity work.HDU PORT MAP (clk, Rsrc1_addr_in ,Rsrc2_addr_in,buff2_Rdst_addr,buff2_memread, freeze_pc , disable_buff , clear_sig );
-    PROCESS(clk , clear_sig)
+    hdu: entity work.HDU PORT MAP (clk, Rsrc1_addr_in ,Rsrc2_addr_in,buff2_Rdst_addr,buff2_memread, freeze_pc , disable_buff_sig , clear_sig ,family_in );
+    PROCESS(clk)
 	BEGIN
-        if(clear_sig = '1') THEN
-            call <= '0';
-            memread<='0';
-            memwrite <=  '0';
-            alusrc <= '0';
-            pc_to_stack <= '0';
-            ldm <= '0';
-            memtoreg<= '0';
-            regwrite <= '0';
-            portread <= '0';
-            portwrite <= '0';
-            mem_to_pc <= '0';
-            rti <= '0';
-            ret<= '0';
-            stack <= "00";
-            aluop <= "011";
-        elsif (rising_edge(clk)) THEN
-            if ( rst = '1' OR exception_stack = '1' OR exception_invalid = '1' OR jump = '1') then
+        if (rising_edge(clk)) THEN
+            if (clear_sig = '1' OR rst = '1' OR exception_stack = '1' OR exception_invalid = '1' OR jump = '1') then
                 call <= '0';
                 memread<='0';
                 memwrite <=  '0';
@@ -114,6 +100,8 @@ BEGIN
             inport_val_out <= inport_val_in;
             int_out <= int_in;
             func_out <= func;
+            disable_buff_out <= disable_buff_sig;
         END IF;
     END PROCESS;
+    disable_buff<=disable_buff_sig;
 END decode_stage_imp;

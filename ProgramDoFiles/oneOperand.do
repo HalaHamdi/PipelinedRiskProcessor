@@ -6,6 +6,7 @@ add wave -position end  sim:/integration/reset
 add wave -position end  sim:/integration/execute_stage/alu/flags
 add wave -position end  sim:/integration/execute_stage/out_reg_q
 add wave -position end  sim:/integration/inport_val
+add wave -position insertpoint  sim:/integration/decode_stage/register_file/reg_out
 
 force -freeze sim:/integration/clk 1 0, 0 {50 ps} -r 100
 force -freeze sim:/integration/reset 1 0

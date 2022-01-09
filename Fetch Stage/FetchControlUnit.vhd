@@ -50,6 +50,7 @@ begin
         std_logic_vector(to_unsigned(8, 32)) when  int = "10"           else
         std_logic_vector(to_unsigned(2, 32)) when  sp_exp = '1'         else
         std_logic_vector(to_unsigned(4, 32)) when  add_exp = '1'        else
+        PC - 1                when    disable = '1'                       else
         Instruction         WHEN    Buff1_reset = '1'                   or
                                     buff1_int = "01" or buff1_int ="10" or
                                     buff4_sp_exp = '1'                  or
@@ -62,7 +63,7 @@ begin
         ((31 downto 16 => '0') & jump_add)            when    is_jump = '1'                       else
         mem_out             when    mem_to_pc = '1'                     else
         PC                  WHEN    (family = "10" AND  func = "000")   else
-        PC                  when    disable = '1'                       else
+        
         PC + 1;    
 
     

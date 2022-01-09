@@ -3,10 +3,11 @@ use ieee.std_logic_1164.all;
 USE IEEE.numeric_std.all;
 
 ENTITY JDU IS 
-	PORT(family_code:IN std_logic_vector(1 downto 0);
+	PORT(disable:IN std_logic;
+		 family_code:IN std_logic_vector(1 downto 0);
 	     function_code:IN std_logic_vector(2 downto 0);
 	     flags:IN std_logic_vector(3 downto 0);
-	     sig_jump:OUT std_logic;
+		 sig_jump:OUT std_logic;
 	     flags_jdu_out:OUT std_logic_vector(3 downto 0));
 END ENTITY JDU;
 
@@ -29,7 +30,8 @@ BEGIN
 -- JMP : 011 
 -- call : 100
 
-sig_jump <= '1' WHEN ((family_code = "11") and (function_code = "000") and (flags(0) = '1'))
+sig_jump <= '0' WHEN disable='1'
+	ELSE '1' WHEN ((family_code = "11") and (function_code = "000") and (flags(0) = '1'))
 	 ELSE '1' WHEN ((family_code = "11") and (function_code = "001") and (flags(2) = '1'))
 	 ELSE '1' WHEN ((family_code = "11") and (function_code = "010") and (flags(1) = '1'))
 	 ELSE '1' WHEN ((family_code = "11") and (function_code = "011"))

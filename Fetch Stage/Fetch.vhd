@@ -102,6 +102,10 @@ begin
             if is_jump = '1' then
                 state <= "001";
             end if;
+
+            if disable = '1' then
+                state <= "001";
+            end if;
         end if;
     end process;
 
