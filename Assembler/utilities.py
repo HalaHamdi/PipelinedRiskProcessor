@@ -99,8 +99,8 @@ operands = {
     "jmp":  {"names": ['src1'],
              "pos": {"src1": 1}},
 
-    "call": {"names": ['dst'],
-             "pos": {"dst": 1}},
+    "call": {"names": ['src1'],
+             "pos": {"src1": 1}},
 
     "ret": {"names": [], "pos": ""},
     "int": {"names": ["index"], "pos": {"index": 1}},

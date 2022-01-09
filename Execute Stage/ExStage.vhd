@@ -47,10 +47,12 @@ signal flags_reserved_out:std_logic_vector(3 DOWNTO 0);
 signal mux4res:std_logic_vector(3 DOWNTO 0);
 signal flags_jdu_out:std_logic_vector(3 DOWNTO 0);
 signal mux5res:std_logic_vector(3 DOWNTO 0);
-signal flag_reserved_reg_enable:std_logic:=int_in(0) or int_in(1);
+signal flag_reserved_reg_enable:std_logic;
 signal mux3result:std_logic_vector(15 downto 0);
 signal jump: std_logic;
-BEGIN		
+BEGIN	
+
+flag_reserved_reg_enable <= int_in(0) or int_in(1);
 --mux1: entity work.exmux1 port map (alusrc,immediate_in,src2,mux1result);
 mux1: entity work.exmux1 port map (alusrc,immediate_in,mux3result,alu_operand2);
 
@@ -72,7 +74,7 @@ flagreg: entity work.flagreg port map('1',clk,rst,mux5res,flags);
 flag_reserved_reg: entity work.flagreg port map(flag_reserved_reg_enable,clk,rst,flags,flags_reserved_out);
 mux4: entity work.exmux4 port map (rti_in,aluflagsout,flags_reserved_out,mux4res);
 
-jdu: entity work.jdu port map (family_code,function_code,flags,jump);
+jdu: entity work.jdu port map (family_code,function_code,flags,jump, flags_jdu_out);
 buff: entity work.ExMemBuff port map(mem_to_pc_in, clk, rst,sp_exception,invalid_address, 
 				     stack_in,int_in,
 				     addr_Rsrc1_in, addr_Rsrc2_in, addr_Rdst_in,
