@@ -97,6 +97,12 @@ begin
                 state <= state - 1;
             end if;
         end if;
+
+        if falling_edge(clk) then
+            if is_jump = '1' then
+                state <= "001";
+            end if;
+        end if;
     end process;
 
 end architecture;

@@ -50,8 +50,6 @@ begin
                                     buff1_int = "01" or buff1_int ="10" or
                                     buff4_sp_exp = '1'                  or
                                     buff4_add_exp = '1'                 else
-
-        PC                  WHEN    (family = "10" AND  func = "000")   else
         PC + 2              WHEN    (family = "00" AND  func = "111")   OR
                                     (family = "01" AND (func = "010"    OR 
                                                         func = "011"    OR 
@@ -62,6 +60,7 @@ begin
         std_logic_vector(to_unsigned(8, 32)) when  int = "10"           else
         std_logic_vector(to_unsigned(2, 32)) when  sp_exp = '1'         else
         std_logic_vector(to_unsigned(4, 32)) when  add_exp = '1'        else
+        PC                  WHEN    (family = "10" AND  func = "000")   else
         PC                  when    disable = '1'                       else
         PC + 1;    
 
