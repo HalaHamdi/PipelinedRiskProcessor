@@ -59,6 +59,8 @@ elsif (rising_edge(clk)) then
 		port_read_out <= '0';
 		mem_to_reg_out <= '0';
 		mem_to_pc_out <= '0';
+		empty_sp_exception_out <= empty_sp_exception_in;
+		invalid_address_exception_out <= invalid_address_exception_in;
 	else
 		empty_sp_exception_out <= empty_sp_exception_in;
 		invalid_address_exception_out <= invalid_address_exception_in;

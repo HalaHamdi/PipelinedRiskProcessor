@@ -6,7 +6,7 @@ entity PC is
     port (
         clk    : in  std_logic;
         data   : in  std_logic_vector(31 Downto 0);
-        output : out std_logic_vector(31 Downto 0)
+        output_pc : out std_logic_vector(31 Downto 0)
     );
 end entity;
 
@@ -17,7 +17,7 @@ begin
     process (clk) is
     begin
         if falling_edge(clk) then
-            output <= data;
+            output_pc <= data;
         end if;
     end process;
 
