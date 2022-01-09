@@ -23,10 +23,10 @@ OUT R6
 RTI          #POP PC and flags restored
 
 .ORG 250 #this is int 2
-SETC
-AND R0,R0,R0    #N=0,Z=1
-OUT R2
-RTI          #POP PC and flags restored
+SETC        # 250
+AND R0,R0,R0    #N=0,Z=1 251
+OUT R2          # 252
+RTI          #POP PC and flags restored # 253
 
 .ORG 10
 IN R1     #R1=30

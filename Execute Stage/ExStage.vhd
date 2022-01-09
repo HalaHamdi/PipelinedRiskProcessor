@@ -43,9 +43,13 @@ signal fu_sig1:std_logic_vector(2 DOWNTO 0);
 signal fu_sig2:std_logic_vector(2 DOWNTO 0);
 signal out_reg_q:std_logic_vector(15 DOWNTO 0);
 signal flags_reserved_out:std_logic_vector(3 DOWNTO 0);
-signal flags_reg_in:std_logic_vector(3 DOWNTO 0);
+--signal flags_reg_in:std_logic_vector(3 DOWNTO 0);
+signal mux4res:std_logic_vector(3 DOWNTO 0);
+signal flags_jdu_out:std_logic_vector(3 DOWNTO 0);
+signal mux5res:std_logic_vector(3 DOWNTO 0);
 signal flag_reserved_reg_enable:std_logic:=int_in(0) or int_in(1);
 signal mux3result:std_logic_vector(15 downto 0);
+signal jump: std_logic;
 BEGIN		
 --mux1: entity work.exmux1 port map (alusrc,immediate_in,src2,mux1result);
 mux1: entity work.exmux1 port map (alusrc,immediate_in,mux3result,alu_operand2);
@@ -59,13 +63,16 @@ mux2: entity work.exmux2 port map (fu_sig1,src1_in,buff3_alu,buff4_alu,buff3_imm
 --mux3: entity work.exmux3 port map (fu_sig2,mux1result,buff3_alu,buff4_alu,buff3_imm,buff4_imm,buff3_in_port,buff4_in_port,buff4_mem_val,alu_operand2);
 mux3: entity work.exmux3 port map (fu_sig2,src2,buff3_alu,buff4_alu,buff3_imm,buff4_imm,buff3_in_port,buff4_in_port,buff4_mem_val,mux3result);
 
+
+mux5: entity work.exmux5 port map (jump,mux4res,flags_jdu_out,mux5res);
+
 out_reg: entity work.OutPortReg port map (port_write,clk,rst,alu_operand1,out_reg_q);
 alu: entity work.alu port map(aluop,alu_operand1,alu_operand2,flags,aluout,aluflagsout);
-flagreg: entity work.flagreg port map('1',clk,rst,flags_reg_in,flags);
+flagreg: entity work.flagreg port map('1',clk,rst,mux5res,flags);
 flag_reserved_reg: entity work.flagreg port map(flag_reserved_reg_enable,clk,rst,flags,flags_reserved_out);
-mux4: entity work.exmux4 port map (rti_in,aluflagsout,flags_reserved_out,flags_reg_in);
+mux4: entity work.exmux4 port map (rti_in,aluflagsout,flags_reserved_out,mux4res);
 
-jdu: entity work.jdu port map (family_code,function_code,flags,sig_jump);
+jdu: entity work.jdu port map (family_code,function_code,flags,jump);
 buff: entity work.ExMemBuff port map(mem_to_pc_in, clk, rst,sp_exception,invalid_address, 
 				     stack_in,int_in,
 				     addr_Rsrc1_in, addr_Rsrc2_in, addr_Rdst_in,
@@ -83,5 +90,6 @@ buff: entity work.ExMemBuff port map(mem_to_pc_in, clk, rst,sp_exception,invalid
 
 flags_q <= flags;
 src1_fu <= alu_operand1;
+sig_jump <= jump;
 	
 END ExStage; 
