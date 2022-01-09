@@ -39,14 +39,18 @@ signal buff_writeback,buff_ldm,buff_port_read,buff_mem_to_reg,buff_mem_to_pc: st
 signal buff_addr_Rsrc1,buff_addr_Rsrc2,buff_addr_Rdst: std_logic_vector(2 downto 0);
 signal buff_alu_result,buff_immediate_value: std_logic_vector(15 downto 0);
 signal buff_memory_data,buff_pc: std_logic_vector(31 downto 0);
-signal epc_signal: std_logic_vector(31 downto 0); --exception program counter
 signal buff_inport_val: std_logic_vector(15 downto 0);
 begin
 
 -- Defining the EPC register
-epc_signal <= buff_pc when (buff_empty_sp_exception = '1' or buff_invalid_address_exception = '1')
-    else epc_signal;
-epc <= epc_signal;
+process (clk) 
+begin
+if(rising_edge(clk)) then
+    if (empty_sp_exception_in = '1' or invalid_address_exception_in = '1') then
+        epc <= pc_in;
+    end if;
+end if;
+end process;
 
 -- Defining the mem/wb buffer
 writeback_buffer_label: entity work.writeback_buffer port map (
