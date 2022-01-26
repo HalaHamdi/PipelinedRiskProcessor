@@ -34,7 +34,7 @@ ModelSim was used to simulate the execution of the program.
 
 ### Processor Schematic
 
-![The schematic of the processor](images/Schematic.png)
+![The schematic of the processor](images/Schematic.jpg)
 [Detailed schematic](https://drive.google.com/file/d/1zuHKoJMy6AUCvIne_Lm-175phOYGpQu8/view)
 [Signals truth table](https://docs.google.com/spreadsheets/d/1lr_N0lB1HSywKzcrYZ6tmSOCiAKztsoX7s7VOZc_qas/edit)
 [Instruction formats and OpCodes](https://docs.google.com/document/d/1ouRm3oqg-eWnROHxTDpU_5tlnD7pdVMgx7yQYFhWJKY/edit)
