@@ -4,6 +4,7 @@
 
 - [Project Description](#Project-Description)
 - [Processor Default Specifications](#Processor-Default-Specifications)
+- [Processor Schematic](#Processor-Schematic)
 - [ISA](#Instruction-Set-Architecture)
 - [How to use the project](#How-to-use-the-project)
 - [ToDo](#ToDo)
