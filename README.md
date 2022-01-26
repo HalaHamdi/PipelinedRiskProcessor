@@ -1,5 +1,13 @@
 # Pipelined Risc Processor
 
+## Table of Contents
+
+- [Project Description](#Project-Description)
+- [Processor Default Specifications](#Processor-Default-Specifications)
+- [ISA](#Instruction-Set-Architecture)
+- [How to use the project](#How-to-use-the-project)
+- [ToDo](#ToDo)
+
 ## Project Description
 
 This is a 5 staged pipelined microprocessor, implemented in VHDL language.
@@ -30,9 +38,7 @@ ModelSim was used to simulate the execution of the program.
 - There is one output port that takes a value from a register and out it to the port.
 - There is a Reset signal named reset in the integration.vhd
 
-## Processor Architecture
-
-### Processor Schematic
+## Processor Schematic
 
 ![The schematic of the processor](images/Schematic.jpg)
 [Detailed schematic](https://drive.google.com/file/d/1zuHKoJMy6AUCvIne_Lm-175phOYGpQu8/view)
@@ -41,7 +47,7 @@ ModelSim was used to simulate the execution of the program.
 
 [Instruction formats and OpCodes](https://docs.google.com/document/d/1ouRm3oqg-eWnROHxTDpU_5tlnD7pdVMgx7yQYFhWJKY/edit)
 
-### Instruction Set Architecture
+## Instruction Set Architecture
 
 |           Mnemonic           |                                                                                                Function                                                                                                 |
 | :--------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
