@@ -1,0 +1,8 @@
+# ignore output of assembler
+*.mem
+
+# ignore bak files
+*.bak
+
+# ignore python cache files 
+__pycache__ 
