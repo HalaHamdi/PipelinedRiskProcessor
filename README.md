@@ -36,7 +36,9 @@ ModelSim was used to simulate the execution of the program.
 
 ![The schematic of the processor](images/Schematic.jpg)
 [Detailed schematic](https://drive.google.com/file/d/1zuHKoJMy6AUCvIne_Lm-175phOYGpQu8/view)
+
 [Signals truth table](https://docs.google.com/spreadsheets/d/1lr_N0lB1HSywKzcrYZ6tmSOCiAKztsoX7s7VOZc_qas/edit)
+
 [Instruction formats and OpCodes](https://docs.google.com/document/d/1ouRm3oqg-eWnROHxTDpU_5tlnD7pdVMgx7yQYFhWJKY/edit)
 
 ## How to use the project
@@ -84,3 +86,11 @@ mem load -infile output.mem -format bin /integration/fetch_stahe/Memory/ram
 ### Processor Configurations
 
 - config_system.vhd file holds some of the processors specifications. To change any specification, change it in this file.
+
+## ToDo
+
+- [ ] Adding a path file to create simulation form output.mem file
+
+- [ ] Adding unit tests for the assembler
+
+- [ ] Adding a patch file to run all tests of the processor with a test report output
