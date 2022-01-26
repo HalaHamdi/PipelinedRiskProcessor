@@ -69,3 +69,5 @@ with open("output.mem", "w") as f:
     for instruction in binary:
         f.write(instruction)
         f.write('\n')
+
+    print("Machine code saved in output.mem file")
