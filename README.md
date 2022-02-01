@@ -1,5 +1,21 @@
 # Pipelined Risc Processor
 
+<p align="center">
+  <a style="text-decoration:none" >
+    <img src="https://img.shields.io/badge/Language-VHDL-blue" alt="Website" />
+  </a>
+  <a style="text-decoration:none" >
+    <img src="https://img.shields.io/badge/ISA-RISC-g" alt="Website" />
+  </a>
+  <a style="text-decoration:none" >
+    <img src="https://img.shields.io/badge/Assembler Language-Python-blue" alt="Website" />
+  </a>
+
+  <a style="text-decoration:none" >
+    <img src="https://img.shields.io/badge/Simulation-ModelSim-blue" alt="Website" />
+  </a>
+</p>
+
 ## Table of Contents
 
 - [Project Description](#Project-Description)
